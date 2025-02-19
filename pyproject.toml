@@ -8,9 +8,28 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "django (>=5.1.6,<6.0.0)"
+    "django (>=5.1.6,<6.0.0)",
+    "python-dotenv (>=1.0.1,<2.0.0)",
+    "psycopg2-binary (>=2.9.10,<3.0.0)"
 ]
 
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.group.dev.dependencies]
+poethepoet = "^0.32.2"
+
+[tool.poe.env]
+PYTHONPATH             = "src"
+APP_NAME               = "cafe-order-system"
+DC                     = "docker compose -p ${APP_NAME} -f docker-compose.dev.yml"
+DC_PROD                = "docker compose -p ${APP_NAME} -f docker-compose.prod.yml"
+
+[tool.poe.tasks]
+up                     = "$DC up --build"
+down                   = "$DC down"
+up_prod                = "$DC_PROD up --build"
+down_prod              = "$DC_PROD down"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
