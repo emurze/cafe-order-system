@@ -9,7 +9,7 @@ from apps.dishes.models import Dish
 def generate_slug(sender, instance, **__) -> None:
     if instance.pk:
         old_instance = Dish.objects.get(pk=instance.pk)
-        if old_instance.title != instance.title:  # Title has changed
+        if old_instance.title != instance.title:
             instance.slug = generate_unique_slug(sender, instance.title)
     else:
         instance.slug = generate_unique_slug(sender, instance.title)

@@ -4,7 +4,7 @@ from django.urls import reverse
 
 class Dish(models.Model):
     title = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Dishes"
