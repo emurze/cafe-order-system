@@ -4,6 +4,7 @@ on: [ push ]
 
 env:
   PYTHONPATH: src
+  SECRET_KEY: secret
 
 jobs:
   end-to-end-tests:
