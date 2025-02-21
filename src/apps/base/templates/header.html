@@ -1,0 +1,16 @@
+<header class="header">
+    <nav class="menu">
+        <div>
+            <a href="{% url 'base:home' %}"
+               class="{% if selected == "home" %}selected{% endif %}">Главная</a>
+        </div>
+        <div>
+            <a href="{% url 'dishes:list' %}"
+               class="{% if selected == "dishes" %}selected{% endif %}">Блюда</a>
+        </div>
+        <div>
+            <a href="#"
+               class="{% if selected == "orders" %}selected{% endif %}">Заказы</a>
+        </div>
+    </nav>
+</header>

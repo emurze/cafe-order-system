@@ -5,11 +5,8 @@ from django.test import Client
 
 @pytest.mark.django_db
 def test_can_create_dish(client: Client) -> None:
-    # arrange
-    url = resolve_url("dishes:create")
-
     # act
-    print(url)
+    url = resolve_url("dishes:create")
     response = client.post(url, data={"title": "Dish"})
 
     # assert

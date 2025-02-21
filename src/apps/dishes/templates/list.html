@@ -1,23 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dishes</title>
-</head>
-<body>
-<div>
-    <div>
-        <a href="{% url "dishes:list" %}">Home</a>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Блюда{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/list.css' %}">
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h1 class="page-title">Блюда</h1>
+        {% for dish in dishes %}
+            <div class="dish-card">
+                <h3>
+                    <a href="{{ dish.get_absolute_url }}"
+                       class="dish-link">{{ dish.title }}</a>
+                </h3>
+                <div class="dish-actions">
+                    <form action="{% url 'dishes:delete' dish.slug %}"
+                          method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete
+                        </button>
+                    </form>
+                    <a href="{% url 'dishes:update' dish.slug %}"
+                       class="btn btn-update">Update</a>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="create-container">
+            <a href="{% url 'dishes:create' %}" class="btn btn-create">Create
+                dish</a>
+        </div>
     </div>
-    <h1>Dishes</h1>
-    {% for dish in dishes %}
-        <h3>
-            <a href="{{ dish.get_absolute_url }}">{{ dish.title }}</a>
-        </h3>
-    {% endfor %}
-    <a href="{% url "dishes:create" %}">
-        <h4>Create dish</h4>
-    </a>
-</div>
-</body>
-</html>
+{% endblock %}

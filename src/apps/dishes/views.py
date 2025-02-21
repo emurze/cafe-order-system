@@ -6,32 +6,36 @@ from django.views.generic import (
     DeleteView,
     UpdateView,
 )
-
 from apps.dishes.forms import DishForm
 from apps.dishes.models import Dish
 
 
 class DishListView(ListView):
-    queryset = Dish.objects.only("title", "slug")
+    queryset = Dish.objects.only("title", "slug")  # Debug toolbar
     context_object_name = "dishes"
     template_name = "list.html"
+    extra_context = {"selected": "dishes"}
 
 
 class DishDetailView(DetailView):
-    queryset = Dish.objects.only("title", "slug")
+    queryset = Dish.objects.only("title", "slug")  # Debug toolbar
     context_object_name = "dish"
     template_name = "detail.html"
 
 
 class DishCreateView(CreateView):
     form_class = DishForm
-    template_name = "dishes.html"
+    template_name = "create.html"
     success_url = reverse_lazy("dishes:list")
 
 
-class DishDeleteView(DeleteView):
-    pass
-
-
 class DishUpdateView(UpdateView):
-    pass
+    queryset = Dish.objects.only("title", "slug")  # Debug toolbar
+    form_class = DishForm
+    context_object_name = "dish"
+    template_name = "update.html"
+
+
+class DishDeleteView(DeleteView):
+    model = Dish
+    success_url = reverse_lazy("dishes:list")
