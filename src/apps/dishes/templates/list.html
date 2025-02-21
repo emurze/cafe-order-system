@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dishes</title>
+</head>
+<body>
+<div>
+    <div>
+        <a href="{% url "dishes:list" %}">Home</a>
+    </div>
+    <h1>Dishes</h1>
+    {% for dish in dishes %}
+        <h3>
+            <a href="{{ dish.get_absolute_url }}">{{ dish.title }}</a>
+        </h3>
+    {% endfor %}
+    <a href="{% url "dishes:create" %}">
+        <h4>Create dish</h4>
+    </a>
+</div>
+</body>
+</html>
