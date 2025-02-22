@@ -1,0 +1,164 @@
+.container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.order-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-card h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    padding-bottom: 10px;
+}
+
+.form-section {
+    margin-bottom: 20px;
+}
+
+.form-section h4 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 2.5fr 2fr 0.5fr auto;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.price-group .price-field {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.price-group .price-field input {
+    flex: 2;
+    min-width: 120px;
+}
+
+.price-group .price-field select {
+    flex: 1;
+    max-width: 100px;
+    height: 39px;
+}
+
+.quantity-group {
+    flex: 1;
+}
+
+.quantity-group input {
+    width: 100%; /* Занимает всю доступную ширину */
+}
+
+.form-row .remove-item {
+    background: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 15px;
+    height: 39px;
+    position: relative;
+    top: 11px;
+}
+
+.form-row .remove-item:hover {
+    background: #cc0000;
+}
+
+.add-item {
+    width: 100%;
+    background: #f8f9fa;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 8px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.add-item::before {
+    content: "+";
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.add-item:hover {
+    background: #e9ecef;
+    border-color: #ccc;
+}
+
+.add-item:active {
+    background: #dee2e6;
+}
+
+.submit-order {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.submit-order:hover {
+    background: #0056b3;
+}
+
+.error {
+    color: #ff0000;
+    margin-top: 5px;
+    font-size: 13px;
+}
+
+.error ul {
+    margin: 0;
+}
+
+.error-list {
+    position: relative;
+    bottom: 10px;
+    font-size: 14px;
+}

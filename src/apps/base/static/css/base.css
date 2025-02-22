@@ -1,3 +1,15 @@
+/* --- Глобальные стили и сброс --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    border: none;
+    outline: none;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -10,9 +22,10 @@ body {
     overflow: auto;
 }
 
+/* Оболочка приложения */
 #app_wrapper {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1200px; /* Сделали карточку больше */
     background: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -27,4 +40,23 @@ main {
     padding: 20px;
     flex-grow: 1;
     overflow-y: auto;
+}
+
+/* Убираем стандартные стили списков */
+ul, ol {
+    list-style: none;
+}
+
+/* Убираем стандартные стили ссылок */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Сброс стилей кнопок */
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
 }
