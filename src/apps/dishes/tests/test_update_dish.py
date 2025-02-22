@@ -14,7 +14,7 @@ def test_can_update_dish(client: Client, faker: Faker) -> None:
 
     # act
     new_title = faker.word()
-    url = resolve_url("_dishes_examples:update", dish.slug)
+    url = resolve_url("dishes:update", dish.slug)
     response = client.post(url, data={"title": new_title})
 
     dish.refresh_from_db()

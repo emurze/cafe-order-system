@@ -5,6 +5,6 @@ from _dishes_examples.models import Dish
 
 class DishListView(ListView):
     queryset = Dish.objects.only("title", "slug")  # Debug toolbar
-    context_object_name = "_dishes_examples"
+    context_object_name = "dishes"
     template_name = "apps/orders/templates/list_orders.html"
-    extra_context = {"selected": "_dishes_examples"}
+    extra_context = {"selected": "dishes"}

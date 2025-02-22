@@ -14,7 +14,7 @@ def test_can_get_dishes(client: Client, faker: Faker) -> None:
     dish2 = baker.make("Dish", title=faker.text(max_nb_chars=50))
 
     # act
-    url = resolve_url("_dishes_examples:list")
+    url = resolve_url("dishes:list")
     response = client.get(url)
     content = response.content.decode("utf-8")
 

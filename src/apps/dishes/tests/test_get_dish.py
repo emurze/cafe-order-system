@@ -13,7 +13,7 @@ def test_can_get_dish(client: Client) -> None:
     dish = baker.make("Dish")
 
     # act
-    url = resolve_url("_dishes_examples:detail", dish.slug)
+    url = resolve_url("dishes:detail", dish.slug)
     response = client.get(url)
 
     # assert
@@ -25,7 +25,7 @@ def test_can_get_dish(client: Client) -> None:
 @pytest.mark.django_db
 def test_cannot_get_dish_error_404(client: Client, faker: Faker) -> None:
     # act
-    url = resolve_url("_dishes_examples:detail", faker.slug())
+    url = resolve_url("dishes:detail", faker.slug())
     response = client.get(url)
 
     # assert

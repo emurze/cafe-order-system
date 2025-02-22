@@ -3,7 +3,7 @@ from django.apps import AppConfig
 
 class DishesConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "_dishes_examples"
+    name = "dishes"
 
     def ready(self) -> None:
         pass
