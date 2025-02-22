@@ -5,12 +5,12 @@
                class="{% if selected == "home" %}selected{% endif %}">Главная</a>
         </div>
         <div>
-            <a href="{% url 'dishes:list' %}"
-               class="{% if selected == "dishes" %}selected{% endif %}">Блюда</a>
+            <a href="{% url 'orders:list' %}"
+               class="{% if selected == "orders" %}selected{% endif %}">Заказы</a>
         </div>
         <div>
-            <a href="#"
-               class="{% if selected == "orders" %}selected{% endif %}">Заказы</a>
+            <a href="{% url 'orders:list' %}"
+               class="{% if selected == "..." %}selected{% endif %}">Выручка</a>
         </div>
     </nav>
 </header>

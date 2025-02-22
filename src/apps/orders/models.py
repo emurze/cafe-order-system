@@ -1,45 +1,45 @@
-from typing import TYPE_CHECKING
-
 from django.db import models
-
-if TYPE_CHECKING:
-    from apps.dishes.models import Dish
 
 
 class Order(models.Model):
     class Status(models.TextChoices):  # Статусы на русском?
         """# (статус заказа: “в ожидании”, “готово”, “оплачено”)"""
 
-        PENDING = "PG", "Pending"
-        READY = "RD", "Ready"
-        PAID = "PD", "Paid"
+        PENDING = "PG", "в ожидании"
+        READY = "RD", "готово"
+        PAID = "PD", "оплачено"
 
     id = models.BigAutoField(primary_key=True)
-    table_numbers = models.PositiveSmallIntegerField()
-    items = models.ForeignKey(
-        to="OrderItem",
-        related_name="orders",
-        on_delete=models.CASCADE,
-    )
-    # общая стоимость заказа, вычисляется автоматическиs
+    table_number = models.PositiveSmallIntegerField()
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    # 1. price, currency !!! MUST HAVE
+
     status = models.CharField(
         max_length=2,
         choices=Status.choices,
         default=Status.PENDING,
     )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)  # ???
 
-    # class Meta
+    class Meta:
+        ordering = ("-created_at",)  # TODO:
+
+    # общая стоимость заказа, вычисляется автоматическиs ЗДЕСЬ
+
+    def __str__(self) -> str:
+        return f"{type(self).__name__}(title={self.id!r})"
 
 
 class OrderItem(models.Model):
     """Заказанное блюдо с ценой"""
 
     id = models.BigAutoField(primary_key=True)
-    dish = models.ForeignKey(  # TODO
-        "dishes.Dish",
-        related_name="order_items",
-        on_delete=models.SET_NULL,
-        null=True,
-    )
+    dish = models.CharField(max_length=256)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    order = models.ForeignKey(
+        to="Order",
+        related_name="items",
+        on_delete=models.CASCADE,
+    )
+    # 2. quantity !!! MUST HAVE

@@ -1,0 +1,164 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.order-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.order-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.order-details {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.order-items-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.order-items {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 0;
+    color: #444;
+}
+
+.order-items li {
+    margin-bottom: 5px;
+}
+
+.empty-message {
+    font-size: 14px;
+    color: #777;
+    margin-top: 10px;
+}
+
+.create-order-btn {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.create-order-btn:hover {
+    background-color: #0056b3;
+}
+
+/* ... other styles remain unchanged ... */
+
+/* Remove absolute positioning for buttons inside order card */
+.order-card-buttons {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+/* Styling for edit and delete buttons remain the same */
+.edit-order-btn,
+.delete-order-btn {
+    padding: 5px 15px;
+    font-size: 14px;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+/* Edit button styling */
+.order-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+/* Уменьшаем нижние отступы для всех элементов, кроме кнопок */
+.order-card > *:not(.order-card-buttons) {
+    margin-bottom: 5px;
+}
+
+/* Переопределяем отступы для заголовков и параграфов, если нужно */
+.order-title,
+.order-details,
+.order-items-title,
+.empty-message {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+/* Контейнер для кнопок, зафиксированный внизу карточки */
+.order-card-buttons {
+    margin-top: auto;
+    display: flex;
+    gap: 10px;
+}
+
+/* Стили для кнопок редактирования и удаления */
+.edit-order-btn,
+.delete-order-btn {
+    padding: 5px 15px;
+    font-size: 14px;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+
+/* Стили для кнопки редактирования */
+.edit-order-btn {
+    background-color: #3498db;
+}
+
+.edit-order-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Стили для кнопки удаления */
+.delete-order-btn {
+    background-color: #e74c3c;
+}
+
+.delete-order-btn:hover {
+    background-color: #c0392b;
+}

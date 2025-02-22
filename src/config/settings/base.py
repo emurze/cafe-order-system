@@ -20,7 +20,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "apps.base.apps.BaseConfig",
-    "apps.dishes.apps.DishesConfig",
     "apps.orders.apps.OrdersConfig",
 ]
 

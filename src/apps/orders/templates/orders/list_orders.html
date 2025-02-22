@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Заказы{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/orders_list.css' %}">
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h1 class="page-title">Таблица заказов</h1>
+
+        {% if orders %}
+            <div class="grid">
+                {% for order in orders %}
+                    <div class="order-card">
+                        <!-- Заголовок заказа кликабельный -->
+                        <a href="{% url 'orders:detail' order.id %}"
+                           class="order-title-link">
+                            <h2 class="order-title">Заказ #{{ order.id }}</h2>
+                        </a>
+
+                        <p class="order-details"><strong>Номер
+                            стола:</strong> {{ order.table_number }}</p>
+                        <p class="order-details"><strong>Общая
+                            цена:</strong> {{ order.total_price }} ₽</p>
+                        <p class="order-details">
+                            <strong>Статус:</strong> {{ order.get_status_display }}
+                        </p>
+
+                        {% if order.items.all %}
+                            <h3 class="order-items-title">Блюда:</h3>
+                            <ul class="order-items">
+                                {% for item in order.items.all %}
+                                    <li><strong>{{ item.dish }}</strong>
+                                        — {{ item.price }} ₽
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="empty-message">В этом заказе пока нет
+                                блюд.</p>
+                        {% endif %}
+
+                        <div class="order-card-buttons">
+                            <a href="{% url 'orders:detail' order.id %}"
+                               class="edit-order-btn">Редактировать</a>
+                            <form action="{% url 'orders:delete' order.id %}"
+                                  method="POST" class="delete-order-form">
+                                {% csrf_token %}
+                                <button type="submit" class="delete-order-btn">
+                                    Удалить
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="empty-message">Заказов пока нет.</p>
+        {% endif %}
+
+        <a href="{% url 'orders:create' %}" class="create-order-btn">Создать
+            заказ</a>
+    </div>
+{% endblock %}

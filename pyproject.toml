@@ -36,6 +36,9 @@ DC_PROD = "docker compose -p ${APP_NAME} -f docker-compose.prod.yml"
 up = "$DC up --build"
 down = "$DC down"
 test = "pytest"
+runserver = { shell = "cd src && python manage.py runserver" }
+migrate = { shell = "cd src && python manage.py migrate" }
+makemigrations = { shell = "cd src && python manage.py makemigrations" }
 up_prod = "$DC_PROD up --build"
 down_prod = "$DC_PROD down"
 

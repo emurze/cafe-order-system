@@ -7,7 +7,7 @@ from config import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("apps.base.urls", namespace="base")),
-    path("", include("apps.dishes.urls", namespace="dishes")),
+    path("orders/", include("apps.orders.urls", namespace="orders")),
 ]
 
 if settings.DEBUG:
@@ -15,5 +15,3 @@ if settings.DEBUG:
         settings.STATIC_URL,
         document_root=settings.STATIC_ROOT,
     )
-    # urlpatterns += static(settings.MEDIA_URL,
-    #                       document_root=settings.MEDIA_ROOT)
