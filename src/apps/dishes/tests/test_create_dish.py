@@ -34,7 +34,7 @@ def test_cannot_create_dish_using_empty_title(client: Client) -> None:
 @pytest.mark.e2e
 @pytest.mark.django_db
 def test_cannot_create_dish_with_title_longer_than_255_characters(
-        client: Client,
+    client: Client,
 ) -> None:
     # act
     url = resolve_url("dishes:create")
@@ -43,7 +43,7 @@ def test_cannot_create_dish_with_title_longer_than_255_characters(
     # assert
     assert response.status_code == status.HTTP_200_OK
     assert (
-            "Ensure this value has at most 255 characters"
-            in response.content.decode()
+        "Ensure this value has at most 255 characters"
+        in response.content.decode()
     )
     assert not Dish.objects.exists()
