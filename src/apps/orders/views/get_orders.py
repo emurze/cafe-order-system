@@ -8,3 +8,4 @@ class OrderListView(ListView):
     context_object_name = "orders"
     template_name = "orders/list.html"
     extra_context = {"selected": "orders"}
+    paginate_by = 18

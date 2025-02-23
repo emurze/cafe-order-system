@@ -1,33 +1,52 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Детали заказа #{{ order.id }}{% endblock %}
+{% block title %}Заказ #{{ order.id }}{% endblock %}
 
 {% block links %}
-    <link rel="stylesheet" href="{% static 'css/list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css/_back_to_orders.css' %}">
 {% endblock %}
 
 {% block main %}
-    <div class="container">
-        <h1 class="page-title">Детали заказа #{{ order.id }}</h1>
+    <!-- Блок с кнопкой "Назад" -->
+    <div class="back-to-order-wrapper">
+        {% include "orders/_back_to_order.html" %}
+    </div>
 
-        <p><strong>Номер стола:</strong> {{ order.table_number }}</p>
-        <p><strong>Общая цена:</strong> {{ order.total_price }} ₽</p>
-        <p><strong>Статус:</strong> {{ order.get_status_display }}</p>
+    <!-- Основной контейнер с заказом -->
+    <div class="container">
+        <h1 class="page-title">Заказ #{{ order.id }}</h1>
+
+        <div class="order-info">
+            <p><strong>Номер стола:</strong> {{ order.table_number }}</p>
+            <p><strong>Общая стоймость:</strong> {{ order.total_price }} BYN
+            </p>
+            <p><strong>Статус:</strong> <span
+                    class="status-badge status-{{ order.status }}">{{ order.get_status_display }}</span>
+            </p>
+        </div>
 
         {% if order.items.all %}
-            <h3>Блюда:</h3>
-            <ul>
+            <h3>Список блюд:</h3>
+            <ul class="order-items-list">
                 {% for item in order.items.all %}
-                    <li><strong>{{ item.dish }}</strong> — {{ item.price }} ₽
+                    <li class="order-item">
+                        <div class="item-name">{{ item.dish }}</div>
+                        <div class="item-price">{{ item.price }} BYN</div>
+                        <div class="item-quantity">x{{ item.quantity }}</div>
                     </li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p>В этом заказе пока нет блюд.</p>
+            <p class="no-items">В этом заказе пока нет блюд.</p>
         {% endif %}
 
-        <a href="{% url 'orders:list' %}" class="back-to-list-btn">Назад к
-            списку заказов</a>
+        <div class="actions">
+            <a href="{% url 'orders:update' order.id %}"
+               class="btn btn-update">Изменить заказ</a>
+            <a href="{% url 'orders:delete' order.id %}"
+               class="btn btn-delete">Удалить заказ</a>
+        </div>
     </div>
 {% endblock %}

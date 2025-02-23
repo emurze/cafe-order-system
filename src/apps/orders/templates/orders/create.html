@@ -5,10 +5,13 @@
 
 {% block links %}
     <link rel="stylesheet" href="{% static 'css/create.css' %}">
+    <link rel="stylesheet" href="{% static 'css/_back_to_orders.css' %}">
 {% endblock %}
 
 {% block main %}
     <div class="container">
+        {% include "orders/_back_to_order.html" %}
+
         <div class="order-card">
             <h2>Создать заказ</h2>
             <form action="{% url 'orders:create' %}" method="POST"

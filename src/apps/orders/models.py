@@ -3,6 +3,7 @@ from decimal import Decimal
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models import DecimalField
+from django.urls import reverse
 
 
 class Order(models.Model):
@@ -12,13 +13,7 @@ class Order(models.Model):
         PAID = "PD", "оплачено"
 
     id = models.BigAutoField(primary_key=True)
-    table_number = models.PositiveIntegerField(
-        "Номер стола",
-        unique=True,
-        error_messages={
-            "unique": "Стол с таким номером уже существует. Пожалуйста, выберите другой номер.",
-        },
-    )
+    table_number = models.PositiveIntegerField("Номер стола")
     total_price = DecimalField(
         "Полная стоймость",
         max_digits=10,
@@ -37,12 +32,14 @@ class Order(models.Model):
 
     class Meta:
         ordering = ("-created_at",)
-        indexes = (models.Index(fields=["table_number"]),)
         verbose_name = "Заказ"
         verbose_name_plural = "Заказы"
 
     def get_total_price(self) -> Decimal:
         return Decimal(sum(item.get_price() for item in self.items.all()))
+
+    def get_absolute_url(self) -> str:
+        return reverse("orders:detail", kwargs={"pk": self.pk})
 
     def __str__(self) -> str:
         return f"{type(self).__name__}(id={self.id!r})"

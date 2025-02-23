@@ -42,19 +42,6 @@ class TestOrder:
                 == item1.price * item1.quantity + item2.price * item2.quantity
         )
 
-    @pytest.mark.django_db
-    def test_cannot_create_two_orders_with_same_table_number(
-            self,
-            faker: Faker,
-    ) -> None:
-        # arrange
-        table_number = faker.random_int(1, 5)
-        baker.make("Order", table_number=table_number)
-
-        # act / assert
-        with pytest.raises(IntegrityError):
-            baker.make("Order", table_number=table_number)
-
 
 class TestOrderItem:
     @pytest.mark.django_db

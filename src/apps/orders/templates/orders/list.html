@@ -5,63 +5,95 @@
 
 {% block links %}
     <link rel="stylesheet" href="{% static 'css/list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/_order_card.css' %}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 {% endblock %}
 
 {% block main %}
     <div class="container">
-        <h1 class="page-title">Таблица заказов</h1>
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Таблица заказов</h1>
+            <div class="header-actions">
+                <form class="search-form" method="GET"
+                      action="{% url 'orders:search' %}">
+                    <div class="search-input-wrapper">
+                        <input type="text" name="query"
+                               placeholder="Поиск заказов..."/>
+                        <button type="submit" class="search-btn">
+                            <i class="fas fa-search"></i> <!-- Иконка лупы -->
+                        </button>
+                    </div>
+                </form>
 
+                <a href="{% url 'orders:create' %}"
+                   class="btn create-order-btn">Создать заказ</a>
+            </div>
+        </div>
+
+        <!-- Messages -->
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                        <span class="close-btn"
+                              onclick="this.parentElement.remove()">&times;</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Orders Grid -->
         {% if orders %}
             <div class="grid">
                 {% for order in orders %}
-                    <div class="order-card">
-                        <!-- Заголовок заказа кликабельный -->
-                        <a href="{% url 'orders:detail' order.id %}"
-                           class="order-title-link">
-                            <h2 class="order-title">Заказ #{{ order.id }}</h2>
-                        </a>
-
-                        <p class="order-details"><strong>Номер
-                            стола:</strong> {{ order.table_number }}</p>
-                        <p class="order-details"><strong>Общая
-                            цена:</strong> {{ order.total_price }} ₽</p>
-                        <p class="order-details">
-                            <strong>Статус:</strong> {{ order.get_status_display }}
-                        </p>
-
-                        {% if order.items.all %}
-                            <h3 class="order-items-title">Блюда:</h3>
-                            <ul class="order-items">
-                                {% for item in order.items.all %}
-                                    <li><strong>{{ item.dish }}</strong>
-                                        — {{ item.price }} ₽
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        {% else %}
-                            <p class="empty-message">В этом заказе пока нет
-                                блюд.</p>
-                        {% endif %}
-
-                        <div class="order-card-buttons">
-                            <a href="{% url 'orders:detail' order.id %}"
-                               class="edit-order-btn">Редактировать</a>
-                            <form action="{% url 'orders:delete' order.id %}"
-                                  method="POST" class="delete-order-form">
-                                {% csrf_token %}
-                                <button type="submit" class="delete-order-btn">
-                                    Удалить
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+                    {% include 'orders/_order_card.html' with order=order %}
                 {% endfor %}
+            </div>
+
+           <!-- Пагинация -->
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1" class="pagination-link first-page">
+                            <i class="fas fa-angle-double-left"></i> <!-- Иконка двойной стрелки влево -->
+                        </a>
+                        <a href="?page={{ page_obj.previous_page_number }}" class="pagination-link prev-page">
+                            <i class="fas fa-angle-left"></i> <!-- Иконка стрелки влево -->
+                        </a>
+                    {% endif %}
+            
+                    <span class="current-page">
+                        Страница <span class="page-number">{{ page_obj.number }}</span> из <span class="total-pages">{{ page_obj.paginator.num_pages }}</span>
+                    </span>
+            
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}" class="pagination-link next-page">
+                            <i class="fas fa-angle-right"></i> <!-- Иконка стрелки вправо -->
+                        </a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-link last-page">
+                            <i class="fas fa-angle-double-right"></i> <!-- Иконка двойной стрелки вправо -->
+                        </a>
+                    {% endif %}
+                </span>
             </div>
         {% else %}
             <p class="empty-message">Заказов пока нет.</p>
         {% endif %}
-
-        <a href="{% url 'orders:create' %}" class="create-order-btn">Создать
-            заказ</a>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        // Функция для удаления сообщения при клике на крестик
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".close-btn").forEach(button => {
+                button.addEventListener("click", function () {
+                    this.parentElement.remove(); // Удаляем родительский элемент сообщения
+                });
+            });
+        });
+    </script>
 {% endblock %}

@@ -1,6 +1,6 @@
+from django.contrib import messages
 from django.core.handlers.wsgi import WSGIRequest
 from django.db import transaction
-from django.db.models.signals import post_save
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
@@ -27,7 +27,12 @@ def create_order(request: WSGIRequest) -> HttpResponse:
                         order_item = OrderItem(order=order, **cd)
                         order_item.save()
 
-                post_save.send(sender=Order, instance=order)
+                order.save()
+
+            messages.success(
+                request,
+                f"Заказ #{order.id} был успешно добавлен!",
+            )
             return redirect("orders:list")
 
         context = {

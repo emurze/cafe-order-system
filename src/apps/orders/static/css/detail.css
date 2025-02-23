@@ -1,0 +1,137 @@
+/* Стили для блока с кнопкой "Назад" */
+.back-to-order-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+/* Основные стили для контейнера */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для заголовка */
+.page-title {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Стили для информации о заказе */
+.order-info {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-info p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Стили для статуса заказа */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.status-pending {
+    background-color: #ffeb3b;
+    color: #000;
+}
+
+.status-completed {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.status-cancelled {
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Стили для списка блюд */
+.order-items-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.item-name {
+    flex: 2;
+    font-size: 16px;
+    color: #333;
+}
+
+.item-price {
+    flex: 1;
+    font-size: 14px;
+    color: #666;
+}
+
+.item-quantity {
+    flex: 1;
+    font-size: 14px;
+    color: #666;
+    text-align: right;
+}
+
+/* Стили для сообщения об отсутствии блюд */
+.no-items {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+}
+
+/* Стили для кнопок действий */
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-update {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-update:hover {
+    background-color: #0056b3;
+}
+
+.btn-delete {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background-color: #d32f2f;
+}

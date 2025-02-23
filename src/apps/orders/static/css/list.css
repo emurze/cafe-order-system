@@ -1,164 +1,206 @@
+/* Общие стили для контейнера */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    font-family: Arial, sans-serif;
 }
 
+/* Стили для заголовка страницы */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Стили для формы поиска */
+.search-form {
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd; /* Граница вокруг всего блока */
+    border-radius: 8px; /* Скругление углов для всего блока */
+    overflow: hidden; /* Чтобы скрыть выступающие части */
+    background-color: white; /* Фон блока */
+}
+
+.search-form input[type="text"] {
+    padding: 10px 15px;
+    border: none; /* Убираем границу у инпута */
+    font-size: 14px;
+    width: 180px; /* Уменьшенная длина инпута */
+    outline: none; /* Убираем обводку при фокусе */
+    border-radius: 8px 0 0 8px; /* Закругляем только левые углы */
+}
+
+/* Стили для кнопки поиска (иконка лупы) */
+.search-btn {
+    background: none;
+    border: none;
+    border-left: 1px solid #ddd; /* Граница между инпутом и кнопкой */
+    cursor: pointer;
+    padding: 10px 15px; /* Отступы для кнопки */
+    align-items: center;
+    justify-content: center;
+    color: #555; /* Цвет иконки */
+    transition: background-color 0.3s ease; /* Анимация для фона */
+    border-radius: 0 8px 8px 0; /* Закругляем только правые углы */
+}
+
+.search-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* Затемнение фона при наведении */
+}
+
+.search-btn i {
+    font-size: 18px; /* Размер иконки */
+}
+
+/* Стили для кнопки создания заказа */
+.create-order-btn {
+    text-decoration: none;
+    background-color: #007BFF; /* Синий цвет */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.create-order-btn:hover {
+    background-color: #0056b3; /* Темно-синий цвет при наведении */
+}
+
+/* Стили для сетки карточек */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 }
 
-.order-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.order-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.order-details {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 5px;
-}
-
-.order-items-title {
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-.order-items {
-    list-style: disc;
-    padding-left: 20px;
-    margin: 0;
-    color: #444;
-}
-
-.order-items li {
-    margin-bottom: 5px;
-}
-
+/* Стили для сообщения о пустом списке */
 .empty-message {
     font-size: 14px;
     color: #777;
     margin-top: 10px;
 }
 
-.create-order-btn {
-    display: inline-block;
-    text-decoration: none;
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 5px;
+/* Стили для пагинации */
+.pagination {
+    margin-top: 30px;
     text-align: center;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
+    font-size: 1rem;
 }
 
-.create-order-btn:hover {
-    background-color: #0056b3;
+/* Стили для пагинации */
+.pagination {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 1rem;
 }
 
-/* ... other styles remain unchanged ... */
-
-/* Remove absolute positioning for buttons inside order card */
-.order-card-buttons {
-    margin-top: 15px;
-    display: flex;
-    gap: 10px;
-}
-
-/* Styling for edit and delete buttons remain the same */
-.edit-order-btn,
-.delete-order-btn {
-    padding: 5px 15px;
-    font-size: 14px;
-    color: white;
-    border-radius: 5px;
-    text-decoration: none;
+.pagination .step-links {
     display: inline-block;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.3s ease;
-}
-
-/* Edit button styling */
-.order-card {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
+    padding: 10px;
     background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Уменьшаем нижние отступы для всех элементов, кроме кнопок */
-.order-card > *:not(.order-card-buttons) {
-    margin-bottom: 5px;
-}
-
-/* Переопределяем отступы для заголовков и параграфов, если нужно */
-.order-title,
-.order-details,
-.order-items-title,
-.empty-message {
-    margin: 5px 0;
-    line-height: 1.4;
-}
-
-/* Контейнер для кнопок, зафиксированный внизу карточки */
-.order-card-buttons {
-    margin-top: auto;
-    display: flex;
-    gap: 10px;
-}
-
-/* Стили для кнопок редактирования и удаления */
-.edit-order-btn,
-.delete-order-btn {
-    padding: 5px 15px;
-    font-size: 14px;
-    color: white;
-    border-radius: 5px;
+.pagination .pagination-link {
+    color: #000;
     text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.3s ease;
+    margin: 0 6px;
+    padding: 6px 12px;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: all 0.3s ease; /* Плавные переходы для всех свойств */
+}
+
+.pagination .pagination-link:hover {
+    background-color: #007bff;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень при наведении */
+}
+
+.pagination .pagination-link i {
+    font-size: 1rem;
+    color: #000;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Плавное изменение цвета иконок */
+}
+
+.pagination .pagination-link:hover i {
+    color: #fff;
+}
+
+.pagination .current-page {
+    margin: 0 10px;
+    font-weight: bold;
+    color: #000;
+    font-size: 1rem;
+}
+
+.pagination .current-page .page-number {
+    color: #000;
+    font-weight: bold;
+}
+
+.pagination .current-page .total-pages {
+    color: #000;
+    font-weight: bold;
 }
 
 
-/* Стили для кнопки редактирования */
-.edit-order-btn {
-    background-color: #3498db;
+@media (max-width: 796px) {
+    .page-header {
+        flex-direction: column; /* Элементы в столбец */
+        align-items: flex-start; /* Выравнивание по левому краю */
+    }
+
+    .header-actions {
+        width: 100%; /* Занимает всю ширину */
+        margin-top: 10px; /* Отступ сверху */
+        flex-direction: column; /* Элементы в столбец */
+        gap: 10px; /* Уменьшаем отступы */
+    }
+
+    .search-form {
+        width: 100%; /* Форма поиска занимает всю ширину */
+    }
+
+    .search-form input[type="text"] {
+        width: calc(100% - 50px); /* Ширина инпута с учетом кнопки */
+    }
+
+    .create-order-btn {
+        width: 100%; /* Кнопка занимает всю ширину */
+        text-align: center; /* Выравнивание текста по центру */
+    }
 }
 
-.edit-order-btn:hover {
-    background-color: #2980b9;
-}
+@media (max-width: 480px) {
+    .grid {
+        grid-template-columns: 1fr; /* Одна колонка на маленьких экранах */
+    }
 
-/* Стили для кнопки удаления */
-.delete-order-btn {
-    background-color: #e74c3c;
-}
+    .pagination .step-links {
+        display: flex;
+        flex-direction: column; /* Пагинация в столбец */
+        gap: 10px; /* Отступы между элементами */
+    }
 
-.delete-order-btn:hover {
-    background-color: #c0392b;
+    .pagination .pagination-link {
+        margin: 5px 0; /* Отступы для кнопок пагинации */
+    }
 }
