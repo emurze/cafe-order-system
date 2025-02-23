@@ -43,7 +43,9 @@
     font-size: 14px;
 }
 
-.form-group input, .form-group select, .form-group textarea {
+.form-group input,
+.form-group select,
+.form-group textarea {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -80,7 +82,7 @@
 }
 
 .quantity-group input {
-    width: 100%; /* Занимает всю доступную ширину */
+    width: 100%;
 }
 
 .form-row .remove-item {
@@ -161,4 +163,96 @@
     position: relative;
     bottom: 10px;
     font-size: 14px;
+}
+
+/* Медиа-запросы для адаптивного дизайна */
+
+/* Для экранов меньше 768px (планшеты и мобильные) */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .order-card {
+        padding: 15px;
+    }
+
+    .order-card h2 {
+        font-size: 20px;
+    }
+
+    .form-section h4 {
+        font-size: 16px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr; /* Одна колонка на мобильных */
+        gap: 5px;
+    }
+
+    .price-group .price-field {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .price-group .price-field input,
+    .price-group .price-field select {
+        width: 100%;
+        max-width: none;
+    }
+
+    .form-row .remove-item {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-top: 0;
+        top: 0;
+    }
+
+    .form-row .remove-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .add-item {
+        font-size: 14px;
+        padding: 6px 0;
+    }
+
+    .submit-order {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
+/* Для экранов меньше 480px (мобильные) */
+@media (max-width: 480px) {
+    .order-card h2 {
+        font-size: 18px;
+    }
+
+    .form-section h4 {
+        font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 6px;
+        font-size: 12px;
+    }
+
+    .add-item {
+        font-size: 12px;
+        padding: 4px 0;
+    }
+
+    .form-row .remove-item {
+        height: auto;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .submit-order {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
 }

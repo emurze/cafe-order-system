@@ -1,8 +1,0 @@
-{% extends 'apps/base/templates/base.html' %}
-
-{% block title %}Блюдо {{ dish.title }}{% endblock %}
-
-{% block main %}
-    <a href="{% url "dishes:list" %}">Home</a>
-    <h1>{{ dish.title }}</h1>
-{% endblock %}

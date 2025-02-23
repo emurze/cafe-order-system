@@ -37,124 +37,11 @@
                     <h4>Список блюд</h4>
                     <div id="order-items">
                         {% for item_form in items_formset %}
-                            <div class="form-row"
-                                 data-form-id="{{ forloop.counter }}">
-                                <!-- Поле "Блюдо" -->
-                                <div class="form-group">
-                                    {{ item_form.dish.label_tag }}
-                                    {{ item_form.dish }}
-                                    {% if item_form.dish.errors %}
-                                        <div class="error">
-                                            <ul>
-                                                {% for error in item_form.dish.errors %}
-                                                    <li>{{ error }}</li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                    {% endif %}
-                                </div>
-
-                                <!-- Поле "Цена" -->
-                                <div class="form-group price-group">
-                                    <label for="{{ item_form.price_0.id_for_label }}">Стоймость:</label>
-                                    <div class="price-field">
-                                        {{ item_form.price }}
-                                    </div>
-                                    {% if item_form.price.errors %}
-                                        <div class="error">
-                                            <ul>
-                                                {% for error in item_form.price.errors %}
-                                                    <li>{{ error }}</li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                    {% endif %}
-                                </div>
-
-                                <!-- Поле "Количество" -->
-                                <div class="form-group quantity-group">
-                                    {{ item_form.quantity.label_tag }}
-                                    {{ item_form.quantity }}
-                                    {% if item_form.quantity.errors %}
-                                        <div class="error">
-                                            <ul>
-                                                {% for error in item_form.quantity.errors %}
-                                                    <li>{{ error }}</li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                    {% endif %}
-                                </div>
-
-                                <!-- Кнопка "Удалить" -->
-                                <button type="button" class="remove-item"
-                                        data-form-id="{{ forloop.counter }}">
-                                    Удалить
-                                </button>
-                            </div>
+                            {% include 'orders/_order_item_form.html' with item_form=item_form form_id=forloop.counter %}
                         {% endfor %}
                     </div>
-                    <!-- Ошибки formsets -->
                     <button type="button" id="add-item"
                             class="add-item"></button>
-                </div>
-
-                <!-- Пустая форма для динамического добавления -->
-                <div id="empty-form" style="display: none;">
-                    <div class="form-row" data-form-id="__prefix__">
-                        <!-- Поле "Блюдо" -->
-                        <div class="form-group">
-                            {{ items_formset.empty_form.dish.label_tag }}
-                            {{ items_formset.empty_form.dish }}
-                            {% if items_formset.empty_form.dish.errors %}
-                                <div class="error">
-                                    <ul>
-                                        {% for error in items_formset.empty_form.dish.errors %}
-                                            <li>{{ error }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            {% endif %}
-                        </div>
-
-                        <!-- Поле "Цена" -->
-                        <div class="form-group price-group">
-                            <label for="{{ items_formset.empty_form.price_0.id_for_label }}">Цена:</label>
-                            <div class="price-field">
-                                {{ items_formset.empty_form.price }}
-                            </div>
-                            {% if items_formset.empty_form.price.errors %}
-                                <div class="error">
-                                    <ul>
-                                        {% for error in items_formset.empty_form.price.errors %}
-                                            <li>{{ error }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            {% endif %}
-                        </div>
-
-                        <!-- Поле "Количество" -->
-                        <div class="form-group quantity-group">
-                            {{ items_formset.empty_form.quantity.label_tag }}
-                            {{ items_formset.empty_form.quantity }}
-                            {% if items_formset.empty_form.quantity.errors %}
-                                <div class="error">
-                                    <ul>
-                                        {% for error in items_formset.empty_form.quantity.errors %}
-                                            <li>{{ error }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            {% endif %}
-                        </div>
-
-                        <!-- Кнопка "Удалить" -->
-                        <button type="button" class="remove-item"
-                                data-form-id="__prefix__">
-                            Удалить
-                        </button>
-                    </div>
                 </div>
 
                 {% if items_formset.non_form_errors %}
@@ -167,12 +54,25 @@
                     </div>
                 {% endif %}
 
-                <!-- Кнопка оформления заказа -->
+                {% if form.non_field_errors %}
+                    <div class="error">
+                        <ul class="error-list">
+                            {% for error in form.non_field_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
                 <div class="form-buttons">
                     <button type="submit" class="submit-order">Оформить заказ
                     </button>
                 </div>
             </form>
+        </div>
+
+        <div id="empty-form" style="display: none;">
+            {% include 'orders/_order_item_form.html' with item_form=items_formset.empty_form form_id="__prefix__" %}
         </div>
     </div>
 {% endblock %}
@@ -187,7 +87,6 @@
 
             // Функция для обновления индексов форм
             function updateFormIndices() {
-                // Исключаем строки, которые находятся внутри невидимого блока
                 const formRows = document.querySelectorAll("#order-items .form-row");
                 formRows.forEach((row, index) => {
                     row.querySelectorAll("input, select, textarea").forEach(field => {
@@ -205,7 +104,6 @@
                 totalForms.value = formRows.length;
             }
 
-            // Функция для добавления обработчика удаления
             function addRemoveHandler(button) {
                 button.addEventListener("click", () => {
                     const formRow = button.closest(".form-row");
@@ -214,7 +112,6 @@
                 });
             }
 
-            // Добавление новой формы
             addButton.addEventListener("click", () => {
                 const totalFormsCount = parseInt(totalForms.value);
                 const newForm = emptyFormTemplate.replace(/__prefix__/g, totalFormsCount);
@@ -230,7 +127,6 @@
                 updateFormIndices(); // Обновляем индексы
             });
 
-            // Обработчики удаления для существующих форм
             document.querySelectorAll(".remove-item").forEach(button => {
                 addRemoveHandler(button);
             });

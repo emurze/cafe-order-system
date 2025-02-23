@@ -1,0 +1,55 @@
+<div class="form-row" data-form-id="{{ form_id }}">
+    <!-- Поле "Блюдо" -->
+    <div class="form-group">
+        {{ item_form.dish.label_tag }}
+        {{ item_form.dish }}
+        {% if item_form.dish.errors %}
+            <div class="error">
+                <ul>
+                    {% for error in item_form.dish.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Поле "Стоймость в BYN:" -->
+    <div class="form-group price-group">
+        <label for="{{ item_form.price.id_for_label }}">Стоймость в
+            BYN:</label>
+        <div class="price-field">
+            {{ item_form.price }}
+        </div>
+        {% if item_form.price.errors %}
+            <div class="error">
+                <ul>
+                    {% for error in item_form.price.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Поле "Количество" -->
+    <div class="form-group quantity-group">
+        {{ item_form.quantity.label_tag }}
+        {{ item_form.quantity }}
+        {% if item_form.quantity.errors %}
+            <div class="error">
+                <ul>
+                    {% for error in item_form.quantity.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Кнопка "Удалить" -->
+    <button type="button" class="remove-item" data-form-id="{{ form_id }}"
+            aria-label="Удалить элемент">
+        Удалить
+    </button>
+</div>
