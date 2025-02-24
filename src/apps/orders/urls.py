@@ -7,12 +7,14 @@ from apps.orders.views import (
     OrderDetailView,
     OrderDeleteView,
     update_order_status,
+    get_order_revenue,
 )
 
 app_name = "orders"
 
 urlpatterns = [
     path("", OrderListView.as_view(), name="list"),
+    path("revenue/", get_order_revenue, name="revenue"),
     path("search/", OrderSearchView.as_view(), name="search"),
     path("create/", create_order, name="create"),
     path("<int:pk>", OrderDetailView.as_view(), name="detail"),

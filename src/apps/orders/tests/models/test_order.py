@@ -11,9 +11,9 @@ if TYPE_CHECKING:
 
 
 def make_order_item(
-        order: Optional["Order"] = None,
-        price: Decimal | None = None,
-        quantity: int | None = None,
+    order: Optional["Order"] = None,
+    price: Decimal | None = None,
+    quantity: int | None = None,
 ) -> "OrderItem":
     faker = Faker()
     return baker.make(
@@ -67,7 +67,7 @@ class TestOrderItem:
     @pytest.mark.django_db
     @pytest.mark.parametrize("price", [Decimal(0), Decimal(1_000_001)])
     def test_cannot_create_order_item_when_price_is_invalid(
-            self, price: Decimal
+        self, price: Decimal
     ) -> None:
         # arrange
         order_item = make_order_item(price=price)
@@ -79,7 +79,7 @@ class TestOrderItem:
     @pytest.mark.django_db
     @pytest.mark.parametrize("quantity", [0, 1001])
     def test_cannot_create_order_item_when_quantity_is_invalid(
-            self, quantity: int
+        self, quantity: int
     ) -> None:
         # arrange
         order_item = make_order_item(quantity=quantity)

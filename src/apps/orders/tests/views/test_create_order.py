@@ -1,6 +1,7 @@
 import pytest
 from django.shortcuts import resolve_url
 from django.test import Client
+from django.urls import reverse
 from faker import Faker
 from rest_framework import status
 
@@ -13,6 +14,18 @@ ONE_FORM_CONF = {
     "form-MIN_NUM_FORMS": [0],
     "form-TOTAL_FORMS": [1],
 }
+
+
+@pytest.mark.django_db
+def test_can_render_forms(client: Client):
+    # act
+    url = reverse("orders:create")
+    response = client.get(url)
+
+    # assert
+    assert response.status_code == status.HTTP_200_OK
+    assert "form" in response.context
+    assert "item_formset" in response.context
 
 
 @pytest.mark.django_db

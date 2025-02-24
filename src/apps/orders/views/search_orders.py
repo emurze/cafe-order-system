@@ -8,6 +8,7 @@ from django.views.generic import ListView
 
 from apps.orders.forms import OrderUpdateForm
 from apps.orders.models import Order
+from config.settings import ORDER_PAGINATE_BY
 
 
 class OrderSearchView(ListView):
@@ -17,13 +18,13 @@ class OrderSearchView(ListView):
         "update_status_form": OrderUpdateForm,
     }
     context_object_name = "orders"
-    paginate_by = 18
+    paginate_by = ORDER_PAGINATE_BY
 
     def get_queryset(self):
         query = self.request.GET.get("query")
 
         if not query:
-            return Order.objects.all()  # TODO
+            return Order.objects.all()
 
         search_query = SearchQuery(query)
         return (

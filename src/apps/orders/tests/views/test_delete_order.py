@@ -30,3 +30,16 @@ def test_cannot_delete_order_error_404(client: Client, faker: Faker) -> None:
 
     # assert
     assert response.status_code == status.HTTP_404_NOT_FOUND
+
+
+@pytest.mark.django_db
+def test_order_delete_view_restricts_get_method(
+        client: Client,
+        faker: Faker,
+) -> None:
+    # act
+    url = reverse("orders:delete", args=(faker.random_int(1, 10),))
+    response = client.get(url)
+
+    # assert
+    assert response.status_code == status.HTTP_405_METHOD_NOT_ALLOWED

@@ -2,6 +2,7 @@ from django.views.generic import ListView
 
 from apps.orders.forms import OrderUpdateForm
 from apps.orders.models import Order
+from config.settings import ORDER_PAGINATE_BY
 
 
 class OrderListView(ListView):
@@ -12,4 +13,4 @@ class OrderListView(ListView):
         "selected": "orders",
         "update_status_form": OrderUpdateForm,
     }
-    paginate_by = 18
+    paginate_by = ORDER_PAGINATE_BY

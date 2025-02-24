@@ -17,7 +17,7 @@ def test_can_get_order(client: Client) -> None:
 
     # assert
     assert response.status_code == status.HTTP_200_OK
-    assert str(order.id) in response.content.decode("utf-8")
+    assert order.id == response.context["order"].id
 
 
 @pytest.mark.django_db
