@@ -1,3 +1,5 @@
+import re
+
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import modelformset_factory
@@ -43,3 +45,14 @@ class OrderUpdateForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ("status",)
+
+
+class OrderShiftRevenueForm(forms.Form):
+    start_time = forms.TimeField(
+        label="Начало смены (HH:MM)",
+        widget=forms.TimeInput(attrs={"type": "time"}),
+    )
+    end_time = forms.TimeField(
+        label="Конец смены (HH:MM)",
+        widget=forms.TimeInput(attrs={"type": "time"}),
+    )

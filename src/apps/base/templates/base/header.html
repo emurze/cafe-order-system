@@ -9,8 +9,8 @@
                class="{% if selected == "orders" %}selected{% endif %}">Заказы</a>
         </div>
         <div>
-            <a href="{% url 'orders:list' %}"
-               class="{% if selected == "..." %}selected{% endif %}">Выручка</a>
+            <a href="{% url 'orders:shift_revenue' %}"
+               class="{% if selected == "shift_revenue" %}selected{% endif %}">Выручка</a>
         </div>
     </nav>
 </header>

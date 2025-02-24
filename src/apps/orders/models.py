@@ -29,6 +29,7 @@ class Order(models.Model):
         default=Status.PENDING,
     )
     created_at = models.DateTimeField("Дата создания", auto_now_add=True)
+    paid_at = models.DateTimeField("Дата оплаты", null=True, blank=True)
 
     class Meta:  # TODO
         ordering = (

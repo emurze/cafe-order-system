@@ -1,6 +1,6 @@
 <div class="order-card">
     <!-- Обертка для содержимого карточки -->
-    <a href="{% url 'orders:detail' order.id %}" class="order-card-link">
+    <a href="{{ order.get_absolute_url }}" class="order-card-link">
         <!-- Order Title -->
         <h2 class="order-title">Заказ #{{ order.id }}</h2>
 

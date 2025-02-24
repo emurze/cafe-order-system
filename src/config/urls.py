@@ -2,10 +2,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from apps.base.views import error_handler_404
 from config import settings
-
-# handler404 = error_handler_404  # TODO
 
 urlpatterns = [
     path("admin/", admin.site.urls),
