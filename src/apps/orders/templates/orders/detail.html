@@ -5,13 +5,17 @@
 
 {% block links %}
     <link rel="stylesheet" href="{% static 'css/detail.css' %}">
-    <link rel="stylesheet" href="{% static 'css/_back_to_orders.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'css/include/_back_to_orders.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'css/include/_delete_confirmation_model.css' %}">
+    <link rel="stylesheet" href="{% static 'css/include/_status_popup.css' %}">
 {% endblock %}
 
 {% block main %}
     <!-- Блок с кнопкой "Назад" -->
     <div class="back-to-order-wrapper">
-        {% include "orders/_back_to_order.html" %}
+        {% include "orders/include/_back_to_order.html" %}
     </div>
 
     <!-- Основной контейнер с заказом -->
@@ -22,8 +26,12 @@
             <p><strong>Номер стола:</strong> {{ order.table_number }}</p>
             <p><strong>Общая стоймость:</strong> {{ order.total_price }} BYN
             </p>
-            <p><strong>Статус:</strong> <span
-                    class="status-badge status-{{ order.status }}">{{ order.get_status_display }}</span>
+            <p class="order-details">
+                <strong>Статус:</strong>
+                <span class="status-badge {% if order.status == order.Status.PENDING %}status-pending
+        {% elif order.status == order.Status.READY %}status-ready
+        {% elif order.status == order.Status.PAID %}status-paid
+        {% endif %}">{{ order.get_status_display }}</span>
             </p>
         </div>
 
@@ -43,10 +51,41 @@
         {% endif %}
 
         <div class="actions">
-            <a href="{% url 'orders:update' order.id %}"
-               class="btn btn-update">Изменить заказ</a>
-            <a href="{% url 'orders:delete' order.id %}"
-               class="btn btn-delete">Удалить заказ</a>
+            <button class="update-status-btn"
+                    onclick="toggleStatusPopup({{ order.id }})">
+                Сменить статус
+            </button>
+
+            <div class="status-popup-container">
+                <div class="status-popup hidden"
+                     id="statusPopup-{{ order.id }}">
+                    <form action="{% url 'orders:update' order.id %}"
+                          method="POST">
+                        {% csrf_token %}
+                        {{ update_status_form.status.as_widget }}
+                        <input type="hidden" name="redirect_to_detail"
+                               value="True">
+                        <button type="submit" class="confirm-btn">Сохранить
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <form action="{% url 'orders:delete' order.id %}" method="post"
+                  class="delete-form">
+                {% csrf_token %}
+                <button type="submit" class="delete-order-btn btn btn-delete">
+                    Удалить заказ
+                </button>
+            </form>
         </div>
     </div>
+
+    {% include "orders/include/_delete_confirmation_model.html" %}
+{% endblock %}
+
+{% block scripts %}
+    <script defer
+            src="{% static "js/include/_status_pop_up.js" %}"></script>
+    <script src="{% static "js/detail.js" %}"></script>
 {% endblock %}

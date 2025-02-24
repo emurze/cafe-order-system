@@ -3,7 +3,6 @@ from typing import TYPE_CHECKING, Optional
 
 import pytest
 from django.core.exceptions import ValidationError
-from django.db import IntegrityError
 from faker import Faker
 from model_bakery import baker
 
@@ -29,6 +28,10 @@ def make_order_item(
 
 
 class TestOrder:
+    @staticmethod
+    def _get_total_price(items: list["OrderItem"]) -> Decimal:
+        return Decimal(sum(item.price * item.quantity for item in items))
+
     @pytest.mark.django_db
     def test_can_calculate_total_price(self) -> None:
         # arrange
@@ -36,10 +39,27 @@ class TestOrder:
         item1 = make_order_item(order=order)
         item2 = make_order_item(order=order)
 
+        # act
+        order.save()
+
+        # assert
+        assert order.total_price == self._get_total_price([item1, item2])
+
+    @pytest.mark.django_db
+    def test_can_recalculate_total_price_after_save(self) -> None:
+        # arrange
+        order = baker.make("Order")
+        item1 = make_order_item(order=order)
+        item2 = make_order_item(order=order)
+        order.save()
+
+        # act
+        item3 = make_order_item(order=order)
+        order.save()
+
         # act / assert
-        assert (
-                order.get_total_price()
-                == item1.price * item1.quantity + item2.price * item2.quantity
+        assert order.total_price == self._get_total_price(
+            [item1, item2, item3]
         )
 
 

@@ -12,3 +12,5 @@ DATABASES = {
         "PORT": os.getenv("DB_PORT", "5432"),
     }
 }
+
+ALLOWED_HOSTS = ["127.0.0.1", "192.168.0.104"]

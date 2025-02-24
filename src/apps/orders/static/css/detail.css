@@ -1,9 +1,17 @@
+@import "include/_status.css";
+
 /* Стили для блока с кнопкой "Назад" */
 .back-to-order-wrapper {
     max-width: 800px;
     margin: 0 auto;
-    margin-bottom: 20px;
+    margin-top: 20px;
 }
+
+.messages-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 
 /* Основные стили для контейнера */
 .container {
@@ -13,6 +21,12 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.container .removing {
+    opacity: 0;
+    transform: scale(0.9);
 }
 
 /* Стили для заголовка */
@@ -44,20 +58,6 @@
     font-weight: bold;
 }
 
-.status-pending {
-    background-color: #ffeb3b;
-    color: #000;
-}
-
-.status-completed {
-    background-color: #4caf50;
-    color: #fff;
-}
-
-.status-cancelled {
-    background-color: #f44336;
-    color: #fff;
-}
 
 /* Стили для списка блюд */
 .order-items-list {
@@ -134,4 +134,57 @@
 
 .btn-delete:hover {
     background-color: #d32f2f;
+}
+
+@media (max-width: 1070px) {
+    .back-to-orders {
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 796px) {
+    .back-to-order-wrapper {
+        margin-top: 10px;
+    }
+}
+
+
+.update-status-btn {
+    padding: 10px 20px; /* Уменьшаем размер кнопки */
+    background-color: #0070FF; /* Насыщенный синий (#0070FF) */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px; /* Уменьшаем размер шрифта */
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.update-status-btn:hover {
+    background-color: #0063d6; /* Менее тёмный синий при наведении */
+}
+
+.status-popup-container {
+    position: relative;
+}
+
+.status-popup {
+    /*padding: 20px !important;*/
+    width: 156px !important;
+    font-size: 14px !important;
+    bottom: 60px;
+    left: -81px;
+}
+
+
+@media (max-width: 400px) {
+    .btn-delete, .update-status-btn {
+        padding: 6px 12px;
+    }
+
+    .status-popup {
+        bottom: 45px !important;
+        left: -73px !important;
+    }
 }

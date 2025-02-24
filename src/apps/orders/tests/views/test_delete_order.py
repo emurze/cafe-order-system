@@ -23,10 +23,7 @@ def test_can_delete_order(client: Client) -> None:
 
 
 @pytest.mark.django_db
-def test_delete_non_existent_order_returns_404(
-        client: Client,
-        faker: Faker,
-) -> None:
+def test_cannot_delete_order_error_404(client: Client, faker: Faker) -> None:
     # act
     url = reverse("orders:delete", args=(faker.random_int(1, 10),))
     response = client.delete(url)

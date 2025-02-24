@@ -1,3 +1,5 @@
+@import "include/_pagination.css";
+
 /* Общие стили для контейнера */
 .container {
     max-width: 1200px;
@@ -92,75 +94,6 @@
     margin-top: 10px;
 }
 
-/* Стили для пагинации */
-.pagination {
-    margin-top: 30px;
-    text-align: center;
-    font-size: 1rem;
-}
-
-/* Стили для пагинации */
-.pagination {
-    margin-top: 30px;
-    text-align: center;
-    font-size: 1rem;
-}
-
-.pagination .step-links {
-    display: inline-block;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.pagination .pagination-link {
-    color: #000;
-    text-decoration: none;
-    margin: 0 6px;
-    padding: 6px 12px;
-    border-radius: 5px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    transition: all 0.3s ease; /* Плавные переходы для всех свойств */
-}
-
-.pagination .pagination-link:hover {
-    background-color: #007bff;
-    color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень при наведении */
-}
-
-.pagination .pagination-link i {
-    font-size: 1rem;
-    color: #000;
-    font-weight: bold;
-    transition: color 0.3s ease; /* Плавное изменение цвета иконок */
-}
-
-.pagination .pagination-link:hover i {
-    color: #fff;
-}
-
-.pagination .current-page {
-    margin: 0 10px;
-    font-weight: bold;
-    color: #000;
-    font-size: 1rem;
-}
-
-.pagination .current-page .page-number {
-    color: #000;
-    font-weight: bold;
-}
-
-.pagination .current-page .total-pages {
-    color: #000;
-    font-weight: bold;
-}
-
 
 @media (max-width: 796px) {
     .page-header {
@@ -192,15 +125,5 @@
 @media (max-width: 480px) {
     .grid {
         grid-template-columns: 1fr; /* Одна колонка на маленьких экранах */
-    }
-
-    .pagination .step-links {
-        display: flex;
-        flex-direction: column; /* Пагинация в столбец */
-        gap: 10px; /* Отступы между элементами */
-    }
-
-    .pagination .pagination-link {
-        margin: 5px 0; /* Отступы для кнопок пагинации */
     }
 }

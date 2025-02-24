@@ -1,0 +1,83 @@
+<div class="order-card">
+    <!-- Обертка для содержимого карточки -->
+    <a href="{% url 'orders:detail' order.id %}" class="order-card-link">
+        <!-- Order Title -->
+        <h2 class="order-title">Заказ #{{ order.id }}</h2>
+
+        <!-- Order Details -->
+        <p class="order-details"><strong>Номер
+            стола:</strong> {{ order.table_number }}</p>
+        <p class="order-details"><strong>Общая
+            стоимость:</strong> {{ order.total_price }} BYN</p>
+        <p class="order-details">
+            <strong>Статус:</strong>
+            <span id="status-{{ order.id }}"
+                  class="status-badge {% if order.status == order.Status.PENDING %}status-pending
+            {% elif order.status == order.Status.READY %}status-ready
+            {% elif order.status == order.Status.PAID %}status-paid
+            {% endif %}">
+                {{ order.get_status_display }}
+            </span>
+        </p>
+
+        <!-- Order Items -->
+        {% if order.items.all %}
+            <p class="order-items-title"><strong>Список блюд:</strong></p>
+            <ul class="order-items">
+                {% for item in order.items.all|slice:":4" %}
+                    <li>
+                        <span>{{ item.dish }} {{ item.price }} BYN - {{ item.quantity }} шт.</span>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% if order.items.all|length > 4 %}
+                <li class="ellipsis">
+                    <a href="{% url 'orders:detail' order.id %}">Посмотреть
+                        все {{ order.items.all|length }} блюд </a>
+                </li>
+            {% endif %}
+        {% else %}
+            <p class="empty-message">В этом заказе пока нет блюд.</p>
+        {% endif %}
+    </a>
+
+    <!-- Кнопки действий -->
+    <div class="order-actions">
+        <button class="update-status-btn"
+                onclick="toggleStatusPopup({{ order.id }})">
+            Сменить статус
+        </button>
+
+        <div class="status-popup-wrapper">
+            <div class="status-popup hidden"
+                 id="statusPopup-{{ order.id }}">
+                <form action="{% url 'orders:update' order.id %}"
+                      method="POST">
+                    {% csrf_token %}
+
+                    <select name="status" id="id_status">
+                        {% for value, display in update_status_form.fields.status.choices %}
+                            <option value="{{ value }}"
+                                {% if order.status == value %}
+                                    selected{% endif %}>
+                                {{ display }}
+                            </option>
+                        {% endfor %}
+                    </select>
+
+                    <button type="submit" class="confirm-btn">Сохранить
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Форма для удаления -->
+        <form action="{% url 'orders:delete' order.id %}" method="post"
+              class="delete-form">
+            {% csrf_token %}
+            <button type="submit" class="delete-order-btn">Удалить</button>
+        </form>
+    </div>
+</div>
+
+{% include "orders/include/_delete_confirmation_model.html" %}

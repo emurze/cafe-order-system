@@ -56,5 +56,5 @@ def test_cannot_create_order_when_order_is_empty(
 
     # assert
     assert response.status_code == status.HTTP_200_OK
-    assert ORDER_CANNOT_BE_EMPTY_ERROR in response.content.decode()
+    assert ORDER_CANNOT_BE_EMPTY_ERROR in response.content.decode("utf-8")
     assert not Order.objects.exists()

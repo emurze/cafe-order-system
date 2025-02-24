@@ -129,3 +129,15 @@ button {
 .alert-error .close-btn:hover {
     background-color: rgba(220, 53, 69, 0.1);
 }
+
+@media (max-width: 1070px) {
+    main {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 796px) {
+    main {
+        padding: 0;
+    }
+}

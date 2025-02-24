@@ -5,12 +5,13 @@
 
 {% block links %}
     <link rel="stylesheet" href="{% static 'css/create.css' %}">
-    <link rel="stylesheet" href="{% static 'css/_back_to_orders.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'css/include/_back_to_orders.css' %}">
 {% endblock %}
 
 {% block main %}
     <div class="container">
-        {% include "orders/_back_to_order.html" %}
+        {% include "orders/include/_back_to_order.html" %}
 
         <div class="order-card">
             <h2>Создать заказ</h2>
@@ -40,7 +41,7 @@
                     <h4>Список блюд</h4>
                     <div id="order-items">
                         {% for item_form in items_formset %}
-                            {% include 'orders/_order_item_form.html' with item_form=item_form form_id=forloop.counter %}
+                            {% include 'orders/include/_order_item_form.html' with item_form=item_form form_id=forloop.counter %}
                         {% endfor %}
                     </div>
                     <button type="button" id="add-item"
@@ -75,7 +76,7 @@
         </div>
 
         <div id="empty-form" style="display: none;">
-            {% include 'orders/_order_item_form.html' with item_form=items_formset.empty_form form_id="__prefix__" %}
+            {% include 'orders/include/_order_item_form.html' with item_form=items_formset.empty_form form_id="__prefix__" %}
         </div>
     </div>
 {% endblock %}

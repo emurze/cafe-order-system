@@ -5,9 +5,10 @@
 
 {% block links %}
     <link rel="stylesheet" href="{% static 'css/list.css' %}">
-    <link rel="stylesheet" href="{% static 'css/_order_card.css' %}">
+    <link rel="stylesheet" href="{% static 'css/include/_order_card.css' %}">
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+          href="{% static 'css/include/_delete_confirmation_model.css' %}">
+    <link rel="stylesheet" href="{% static 'css/include/_status_popup.css' %}">
 {% endblock %}
 
 {% block main %}
@@ -49,32 +50,41 @@
         {% if orders %}
             <div class="grid">
                 {% for order in orders %}
-                    {% include 'orders/_order_card.html' with order=order %}
+                    {% include 'orders/include/_order_card.html' with order=order %}
                 {% endfor %}
             </div>
 
-           <!-- Пагинация -->
+            <!-- Пагинация -->
             <div class="pagination">
                 <span class="step-links">
                     {% if page_obj.has_previous %}
                         <a href="?page=1" class="pagination-link first-page">
-                            <i class="fas fa-angle-double-left"></i> <!-- Иконка двойной стрелки влево -->
+                            <i class="fas fa-angle-double-left"></i>
+                            <!-- Иконка двойной стрелки влево -->
                         </a>
-                        <a href="?page={{ page_obj.previous_page_number }}" class="pagination-link prev-page">
-                            <i class="fas fa-angle-left"></i> <!-- Иконка стрелки влево -->
+                        <a href="?page={{ page_obj.previous_page_number }}"
+                           class="pagination-link prev-page">
+                            <i class="fas fa-angle-left"></i>
+                            <!-- Иконка стрелки влево -->
                         </a>
                     {% endif %}
-            
+
                     <span class="current-page">
-                        Страница <span class="page-number">{{ page_obj.number }}</span> из <span class="total-pages">{{ page_obj.paginator.num_pages }}</span>
+                        Страница <span
+                            class="page-number">{{ page_obj.number }}</span> из <span
+                            class="total-pages">{{ page_obj.paginator.num_pages }}</span>
                     </span>
-            
+
                     {% if page_obj.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}" class="pagination-link next-page">
-                            <i class="fas fa-angle-right"></i> <!-- Иконка стрелки вправо -->
+                        <a href="?page={{ page_obj.next_page_number }}"
+                           class="pagination-link next-page">
+                            <i class="fas fa-angle-right"></i>
+                            <!-- Иконка стрелки вправо -->
                         </a>
-                        <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-link last-page">
-                            <i class="fas fa-angle-double-right"></i> <!-- Иконка двойной стрелки вправо -->
+                        <a href="?page={{ page_obj.paginator.num_pages }}"
+                           class="pagination-link last-page">
+                            <i class="fas fa-angle-double-right"></i>
+                            <!-- Иконка двойной стрелки вправо -->
                         </a>
                     {% endif %}
                 </span>
@@ -86,14 +96,7 @@
 {% endblock %}
 
 {% block scripts %}
-    <script>
-        // Функция для удаления сообщения при клике на крестик
-        document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll(".close-btn").forEach(button => {
-                button.addEventListener("click", function () {
-                    this.parentElement.remove(); // Удаляем родительский элемент сообщения
-                });
-            });
-        });
-    </script>
+    <script defer src="{% static "js/include/_status_pop_up.js" %}"></script>
+    <script defer src="{% static "js/include/_order_card.js" %}"></script>
+    <script defer src="{% static "js/include/_messages.js" %}"></script>
 {% endblock %}

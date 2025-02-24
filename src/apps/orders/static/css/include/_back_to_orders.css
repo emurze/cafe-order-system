@@ -19,3 +19,15 @@
 .back-to-orders:active {
     color: #004080; /* Еще темнее синий при нажатии */
 }
+
+@media (max-width: 1070px) {
+    .back-to-orders {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 796px) {
+    .back-to-orders {
+        margin-top: 20px;
+    }
+}

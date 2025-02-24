@@ -1,0 +1,68 @@
+/* static/css/404.css */
+.not-found-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.not-found-content {
+    max-width: 600px;
+    padding: 40px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
+}
+
+.not-found-content h1 {
+    font-size: 120px;
+    font-weight: 700;
+    color: #ff6b6b;
+    margin: 0;
+    line-height: 1;
+}
+
+.not-found-content h2 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #333;
+    margin: 20px 0 10px;
+}
+
+.not-found-content p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.home-button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #ff6b6b;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.home-button:hover {
+    background-color: #ff4c4c;
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

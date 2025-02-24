@@ -6,12 +6,16 @@ from django.contrib.postgres.search import (
 from django.db.models import Case, When, Value
 from django.views.generic import ListView
 
+from apps.orders.forms import OrderUpdateForm
 from apps.orders.models import Order
 
 
 class OrderSearchView(ListView):
     template_name = "orders/list.html"
-    extra_context = {"selected": "orders"}
+    extra_context = {
+        "selected": "orders",
+        "update_status_form": OrderUpdateForm,
+    }
     context_object_name = "orders"
     paginate_by = 18
 

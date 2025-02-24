@@ -8,9 +8,9 @@ from django.urls import reverse
 
 class Order(models.Model):
     class Status(models.TextChoices):
-        PENDING = "PG", "в ожидании"
-        READY = "RD", "готово"
-        PAID = "PD", "оплачено"
+        PENDING = "1", "в ожидании"
+        READY = "2", "готово"
+        PAID = "3", "оплачено"
 
     id = models.BigAutoField(primary_key=True)
     table_number = models.PositiveIntegerField("Номер стола")
@@ -24,14 +24,17 @@ class Order(models.Model):
     )
     status = models.CharField(
         "Статус",
-        max_length=2,
+        max_length=1,
         choices=Status.choices,
         default=Status.PENDING,
     )
     created_at = models.DateTimeField("Дата создания", auto_now_add=True)
 
-    class Meta:
-        ordering = ("-created_at",)
+    class Meta:  # TODO
+        ordering = (
+            "status",
+            "-created_at",
+        )
         verbose_name = "Заказ"
         verbose_name_plural = "Заказы"
 
