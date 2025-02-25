@@ -17,5 +17,5 @@ def update_order_total_price(
 
 @receiver(pre_save, sender=Order)
 def set_paid_at(sender: type[Order], instance: Order, **__) -> None:
-    if instance.status == sender.Status.PAID:
+    if instance.status == sender.Status.PAID and instance.pk:
         instance.paid_at = timezone.now()

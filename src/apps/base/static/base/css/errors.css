@@ -1,0 +1,56 @@
+.error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    color: #333; /* Темный текст */
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.error-content {
+    background-color: #fff; /* Белый фон контента */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    max-width: 500px;
+    width: 100%;
+}
+
+.error-title {
+    font-size: 80px;
+    margin: 0;
+    font-weight: bold;
+    color: #444; /* Серый цвет заголовка */
+}
+
+.error-message {
+    font-size: 24px;
+    margin: 20px 0;
+    font-weight: bold;
+    color: #333; /* Темный текст */
+}
+
+.error-description {
+    font-size: 16px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+    color: #666; /* Серый текст */
+}
+
+.home-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; /* Синий фон кнопки */
+    color: #fff; /* Белый текст */
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+    background-color: #0056b3; /* Темно-синий фон при наведении */
+}

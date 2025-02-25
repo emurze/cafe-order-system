@@ -1,0 +1,115 @@
+.revenue-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+}
+
+.revenue-form-wrapper {
+    padding: 0 20px;
+}
+
+.revenue-form h1 {
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+.form-field input[type="time"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.error-message {
+    color: #ff0000;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.revenue-result {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #e8f5e9; /* Светло-зелёный фон */
+    border: 1px solid #c8e6c9; /* Зелёная граница */
+    border-radius: 8px; /* Закруглённые углы */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для объёма */
+}
+
+.revenue-result h2 {
+    margin-bottom: 15px;
+    font-size: 22px; /* Увеличил размер заголовка */
+    color: #2e7d32; /* Тёмно-зелёный цвет для заголовка */
+    text-align: center; /* Центрируем заголовок */
+}
+
+.revenue-result p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333; /* Тёмный цвет текста */
+}
+
+.revenue-result strong {
+    color: #1b5e20; /* Ярко-зелёный цвет для акцентов */
+    font-weight: 600; /* Жирный текст для акцентов */
+}
+
+.error-messages {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ffebee;
+    border: 1px solid #ffcdd2;
+    border-radius: 4px;
+    color: #c62828;
+}
+
+.error-messages h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #c62828;
+}
+
+.error-messages ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.error-messages li {
+    margin-bottom: 5px;
+    font-size: 14px;
+}

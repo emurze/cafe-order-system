@@ -13,6 +13,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "apps.base.apps.BaseConfig",  # TODO: check
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -20,7 +21,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.postgres",
-    "apps.base.apps.BaseConfig",
+    "rest_framework",
     "apps.orders.apps.OrdersConfig",
 ]
 
@@ -83,8 +84,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-TIME_FORMAT = "H:i"
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -93,10 +92,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = [
-    Path(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "apps/base/static"),
+    os.path.join(BASE_DIR, "apps/orders/static"),
 ]
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR / "static"
 
 DEFAULT_CURRENCY = "BYN"
 

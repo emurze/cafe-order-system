@@ -12,3 +12,12 @@ DATABASES = {
         "PORT": os.getenv("DB_PORT", "5432"),
     }
 }
+
+ALLOWED_HOSTS = [  # TODO
+    "192.168.0.104",
+    "127.0.0.1",
+    "localhost",
+    "cafe-order-system",
+    "0.0.0.0",
+    "127.0.0.1",
+]

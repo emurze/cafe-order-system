@@ -1,0 +1,33 @@
+.back-to-orders {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 8px 16px;
+    background-color: transparent; /* Прозрачный фон */
+    color: #007bff; /* Синий цвет текста */
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.back-to-orders:hover {
+    color: #0056b3; /* Темнее синий при наведении */
+    background-color: rgba(0, 123, 255, 0.1); /* Легкий фон при наведении */
+}
+
+.back-to-orders:active {
+    color: #004080; /* Еще темнее синий при нажатии */
+}
+
+@media (max-width: 1070px) {
+    .back-to-orders {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 796px) {
+    .back-to-orders {
+        margin-top: 20px;
+    }
+}

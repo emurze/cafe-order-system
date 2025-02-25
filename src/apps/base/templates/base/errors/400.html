@@ -1,9 +1,22 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
-{% block title %}Страница не найдена{% endblock %}
+{% block title %}Некорректный запрос{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'base/css/errors.css' %}">
+{% endblock %}
 
 {% block main %}
-    <h1>Oops! Page not found.</h1>
-    <p>The page you were looking for doesn't exist.</p>
-    <a href="{% url 'home' %}">Return to Home</a>
+    <div class="error-container">
+        <div class="error-content">
+            <h1 class="error-title">400</h1>
+            <p class="error-message">Некорректный запрос</p>
+            <p class="error-description">
+                Сервер не смог обработать ваш запрос. Проверьте правильность
+                введенных данных и попробуйте снова.
+            </p>
+            <a href="{% url 'base:home' %}" class="home-button">Вернуться на главную</a>
+        </div>
+    </div>
 {% endblock %}

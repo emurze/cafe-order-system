@@ -4,11 +4,13 @@
 {% block title %}Заказы{% endblock %}
 
 {% block links %}
-    <link rel="stylesheet" href="{% static 'css/list.css' %}">
-    <link rel="stylesheet" href="{% static 'css/include/_order_card.css' %}">
+    <link rel="stylesheet" href="{% static 'orders/css/list.css' %}">
     <link rel="stylesheet"
-          href="{% static 'css/include/_delete_confirmation_model.css' %}">
-    <link rel="stylesheet" href="{% static 'css/include/_status_popup.css' %}">
+          href="{% static 'orders/css/include/_order_card.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'orders/css/include/_delete_confirmation_model.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'orders/css/include/_status_popup.css' %}">
 {% endblock %}
 
 {% block main %}
@@ -96,7 +98,9 @@
 {% endblock %}
 
 {% block scripts %}
-    <script defer src="{% static "js/include/_status_pop_up.js" %}"></script>
-    <script defer src="{% static "js/include/_order_card.js" %}"></script>
-    <script defer src="{% static "js/include/_messages.js" %}"></script>
+    <script defer
+            src="{% static "orders/js/include/_status_pop_up.js" %}"></script>
+    <script defer
+            src="{% static "orders/js/include/_order_card.js" %}"></script>
+    <script defer src="{% static "orders/js/include/_messages.js" %}"></script>
 {% endblock %}

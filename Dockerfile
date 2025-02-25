@@ -17,8 +17,7 @@ RUN poetry config virtualenvs.create false
 RUN poetry install --no-interaction --no-ansi
 
 COPY src src
-COPY tests tests
 
 EXPOSE 8080
 
-CMD bash -c "poe migrate && poe start"
+CMD bash -c "cd src && poe migrate && poe collectstatic && poe start"

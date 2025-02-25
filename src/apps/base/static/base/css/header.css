@@ -1,0 +1,33 @@
+.header {
+    background: #333;
+    color: #fff;
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 15px;
+    transition: background 0.3s ease;
+}
+
+.menu a:hover {
+    background: #555;
+    border-radius: 5px;
+}
+
+/* Стиль для выбранного/активного элемента */
+.menu a.selected {
+    background: #444; /* Тёмно-серый цвет */
+    color: white;
+    border-radius: 5px;
+}

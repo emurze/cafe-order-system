@@ -1,0 +1,46 @@
+services:
+  db:
+    image: 'postgres:16'
+    networks:
+      - backend
+    env_file: .env.prod
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  cafe-order-system:
+    build: .
+    image: 'cafe-order-system:v1'
+    networks:
+      - backend
+    volumes:
+      - ./src:/service/src
+      - app_static:/service/src/static
+      - app_media:/service/src/media
+    env_file: .env.prod
+    restart: unless-stopped
+    depends_on:
+      - db
+
+  web_server:
+    image: 'nginx:alpine3.18'
+    container_name: 'web_server'
+    networks:
+      - backend
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/nginx.conf
+      - app_static:/srv/static
+      - app_media:/srv/media
+    ports:
+      - '80:80'
+    restart: unless-stopped
+    depends_on:
+      - cafe-order-system
+
+networks:
+  backend:
+
+volumes:
+  postgres_data:
+  app_static:
+  app_media:

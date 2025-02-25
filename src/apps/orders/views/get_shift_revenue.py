@@ -28,15 +28,8 @@ def get_shift_revenue(request: WSGIRequest) -> HttpResponse:
                 timezone.datetime.combine(today, end_time)
             )
 
-            # if end_time <= start_time:
-            #     end_datetime += timezone.timedelta(days=1)
-
-            order = Order.objects.first()  # TODO
-            print(f"{order.status == Order.Status.PAID}")
-            print(f"{order.paid_at=}")
-            print(f"{start_datetime} {order.paid_at} {end_datetime}")
-            print(f"{order.paid_at >= start_datetime}")
-            print(f"{order.paid_at <= end_datetime}")  # TODO: False
+            if end_time <= start_time:
+                end_datetime += timezone.timedelta(days=1)
 
             orders = Order.objects.filter(
                 status=Order.Status.PAID,
