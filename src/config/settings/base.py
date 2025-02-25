@@ -13,7 +13,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "apps.base.apps.BaseConfig",  # TODO: check
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -22,6 +21,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.postgres",
     "rest_framework",
+    "apps.base.apps.BaseConfig",
     "apps.orders.apps.OrdersConfig",
 ]
 

@@ -1,6 +1,6 @@
 from django.core.handlers.wsgi import WSGIRequest
 from django.db import transaction
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.http import require_POST

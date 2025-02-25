@@ -1,12 +1,11 @@
 from django.views.generic import ListView
 
 from apps.orders.forms import OrderUpdateForm
-from apps.orders.models import Order
+from apps.orders.mixins import OrderLongQueryMixin
 from config.settings import ORDER_PAGINATE_BY
 
 
-class OrderListView(ListView):
-    queryset = Order.objects.all()
+class OrderListView(OrderLongQueryMixin, ListView):
     context_object_name = "orders"
     template_name = "orders/list.html"
     extra_context = {

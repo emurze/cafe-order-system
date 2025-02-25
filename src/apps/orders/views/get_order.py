@@ -1,16 +1,13 @@
 from django.views.generic import DetailView
 
 from apps.orders.forms import OrderUpdateForm
-from apps.orders.models import Order
+from apps.orders.mixins import OrderShortQueryMixin
 
 
-class OrderDetailView(DetailView):
-    queryset = Order.objects.all()  # TODO: .only
+class OrderDetailView(OrderShortQueryMixin, DetailView):
     context_object_name = "order"
     template_name = "orders/detail.html"
-    extra_context = {
-        "selected": "orders",
-    }
+    extra_context = {"selected": "orders"}
 
     def get_context_data(self, **kwargs) -> dict:
         context = super().get_context_data(**kwargs)

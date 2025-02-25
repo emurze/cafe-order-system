@@ -7,11 +7,12 @@ from django.db.models import Case, When, Value
 from django.views.generic import ListView
 
 from apps.orders.forms import OrderUpdateForm
+from apps.orders.mixins import OrderLongQueryMixin
 from apps.orders.models import Order
 from config.settings import ORDER_PAGINATE_BY
 
 
-class OrderSearchView(ListView):
+class OrderSearchView(OrderLongQueryMixin, ListView):
     template_name = "orders/list.html"
     extra_context = {
         "selected": "orders",
@@ -20,15 +21,17 @@ class OrderSearchView(ListView):
     context_object_name = "orders"
     paginate_by = ORDER_PAGINATE_BY
 
-    def get_queryset(self):
+    def get_queryset(self):  # TODO INDEX and get_queryset()
         query = self.request.GET.get("query")
 
         if not query:
-            return Order.objects.all()
+            return super().get_queryset()
 
-        search_query = SearchQuery(query)
+        search_query = SearchQuery(query)  # TODO GIN INDEX
         return (
-            Order.objects.annotate(  # TODO: GIN index
+            super()
+            .get_queryset()
+            .annotate(
                 status_text=Case(
                     *[
                         When(status=db_value, then=Value(label))

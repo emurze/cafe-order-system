@@ -31,13 +31,18 @@ class Order(models.Model):
     created_at = models.DateTimeField("Дата создания", auto_now_add=True)
     paid_at = models.DateTimeField("Дата оплаты", null=True, blank=True)
 
-    class Meta:  # TODO
+    class Meta:
         ordering = (
             "status",
             "-created_at",
         )
         verbose_name = "Заказ"
         verbose_name_plural = "Заказы"
+        indexes = [
+            models.Index(fields=("status", "-created_at")),
+            models.Index(fields=["status", "paid_at"]),
+            # GinIndex(fields=["id", "status"]),
+        ]
 
     def get_total_price(self) -> Decimal:
         return Decimal(sum(item.get_price() for item in self.items.all()))

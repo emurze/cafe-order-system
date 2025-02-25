@@ -2,7 +2,7 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils import timezone
-from django.db.models import Sum
+from django.db.models import Sum, Count
 from django.views.decorators.http import require_GET
 
 from apps.orders.forms import OrderShiftRevenueForm
@@ -37,19 +37,15 @@ def get_shift_revenue(request: WSGIRequest) -> HttpResponse:
                 paid_at__gte=start_datetime,
                 paid_at__lte=end_datetime,
             )
-
-            revenue = (
-                    orders.aggregate(total_revenue=Sum("total_price"))[
-                        "total_revenue"
-                    ]
-                    or 0
+            result = orders.aggregate(
+                total_revenue=Sum("total_price"),
+                total_orders=Count("*"),
             )
-            total_orders = orders.count()
 
             context = {
                 "form": form,
-                "revenue": revenue,
-                "total_orders": total_orders,
+                "revenue": result["total_revenue"] or 0,
+                "total_orders": result["total_orders"],
                 "start_time": start_time,
                 "end_time": end_time,
                 **extra_context,
