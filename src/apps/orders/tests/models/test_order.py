@@ -11,9 +11,9 @@ if TYPE_CHECKING:
 
 
 def make_order_item(
-    order: Optional["Order"] = None,
-    price: Decimal | None = None,
-    quantity: int | None = None,
+        order: Optional["Order"] = None,
+        price: Decimal | None = None,
+        quantity: int | None = None,
 ) -> "OrderItem":
     faker = Faker()
     return baker.make(
@@ -62,12 +62,32 @@ class TestOrder:
             [item1, item2, item3]
         )
 
+    @pytest.mark.django_db
+    def test_paid_at_is_null_after_order_creation(self) -> None:
+        # act
+        order = baker.make("Order")
+
+        # assert
+        assert not order.paid_at
+
+    @pytest.mark.django_db
+    def test_paid_at_is_set_when_order_status_is_paid(self) -> None:
+        # arrange
+        order = baker.make("Order")
+
+        # act
+        order.status = order.Status.PAID
+        order.save()
+
+        # assert
+        assert order.paid_at
+
 
 class TestOrderItem:
     @pytest.mark.django_db
     @pytest.mark.parametrize("price", [Decimal(0), Decimal(1_000_001)])
     def test_cannot_create_order_item_when_price_is_invalid(
-        self, price: Decimal
+            self, price: Decimal
     ) -> None:
         # arrange
         order_item = make_order_item(price=price)
@@ -79,7 +99,7 @@ class TestOrderItem:
     @pytest.mark.django_db
     @pytest.mark.parametrize("quantity", [0, 1001])
     def test_cannot_create_order_item_when_quantity_is_invalid(
-        self, quantity: int
+            self, quantity: int
     ) -> None:
         # arrange
         order_item = make_order_item(quantity=quantity)

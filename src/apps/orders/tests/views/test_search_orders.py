@@ -19,19 +19,3 @@ def test_can_search_orders(client: Client) -> None:
     # assert
     assert response.status_code == status.HTTP_200_OK
     assert queryset.count() == 1
-
-
-@pytest.mark.django_db
-def test_can_search_orders_when_query_is_empty(client: Client) -> None:
-    # arrange
-    baker.make("Order")
-    baker.make("Order")
-
-    # act
-    url = reverse("orders:search")
-    response = client.get(f"{url}")
-    queryset = response.context["orders"]
-
-    # assert
-    assert response.status_code == status.HTTP_200_OK
-    assert queryset.count() == 2

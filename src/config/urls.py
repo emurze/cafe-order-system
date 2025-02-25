@@ -16,7 +16,7 @@ handler403 = error_handler_403
 handler400 = error_handler_400
 
 urlpatterns = [
-    path("api/v1/", include("apps.orders.api_urls", namespace="orders_api")),
+    path("api/v1/", include("apps.orders.api_urls")),
     path("admin/", admin.site.urls),
     path("", include("apps.base.urls", namespace="base")),
     path("orders/", include("apps.orders.urls", namespace="orders")),

@@ -1,12 +1,10 @@
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.utils import timezone
-from django.db.models import Sum, Count
 from django.views.decorators.http import require_GET
 
+from apps.orders import services
 from apps.orders.forms import OrderShiftRevenueForm
-from apps.orders.models import Order
 
 
 @require_GET
@@ -18,30 +16,7 @@ def get_shift_revenue(request: WSGIRequest) -> HttpResponse:
         if form.is_valid():
             start_time = form.cleaned_data["start_time"]
             end_time = form.cleaned_data["end_time"]
-
-            today = timezone.now().date()
-
-            start_datetime = timezone.make_aware(
-                timezone.datetime.combine(today, start_time)
-            )
-            end_datetime = timezone.make_aware(
-                timezone.datetime.combine(today, end_time)
-            )
-
-            if end_time <= start_time:
-                end_datetime += timezone.timedelta(days=1)
-
-            orders = Order.objects.filter(
-                status=Order.Status.PAID,
-                paid_at__isnull=False,
-                paid_at__gte=start_datetime,
-                paid_at__lte=end_datetime,
-            )
-            result = orders.aggregate(
-                total_revenue=Sum("total_price"),
-                total_orders=Count("*"),
-            )
-
+            result = services.get_shift_revenue(start_time, end_time)
             context = {
                 "form": form,
                 "revenue": result["total_revenue"] or 0,

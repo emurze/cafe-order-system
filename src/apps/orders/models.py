@@ -19,7 +19,7 @@ class Order(models.Model):
         max_digits=10,
         decimal_places=2,
         validators=[
-            MinValueValidator(0),
+            MinValueValidator(Decimal(0)),
         ],
     )
     status = models.CharField(
@@ -65,10 +65,10 @@ class OrderItem(models.Model):
         decimal_places=2,
         validators=[
             MinValueValidator(
-                0.01, message="Стоимость должна быть не менее 0.01."
+                Decimal(0.01), message="Стоимость должна быть не менее 0.01."
             ),
             MaxValueValidator(
-                1_000_000, message="Цена не может превышать 1000000."
+                Decimal(1_000_000), message="Цена не может превышать 1000000."
             ),
         ],
     )

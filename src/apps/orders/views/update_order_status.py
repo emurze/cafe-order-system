@@ -1,12 +1,12 @@
 from django.core.handlers.wsgi import WSGIRequest
-from django.db import transaction
-from django.http import HttpResponse
-from django.shortcuts import redirect, get_object_or_404
+from django.http import HttpResponse, Http404
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.decorators.http import require_POST
 
+from apps.orders import services
+from apps.orders.exceptions import OrderNotFoundException
 from apps.orders.forms import OrderUpdateForm
-from apps.orders.models import Order
 
 
 @require_POST
@@ -15,10 +15,11 @@ def update_order_status(request: WSGIRequest, pk: int) -> HttpResponse:
     if not form.is_valid():
         return redirect(reverse("orders:list"))
 
-    with transaction.atomic():
-        order = get_object_or_404(Order.objects.select_for_update(), pk=pk)
-        order.status = form.cleaned_data["status"]
-        order.save()
+    try:
+        cd = form.cleaned_data
+        services.update_order_status(pk=pk, status=cd["status"])
+    except OrderNotFoundException:
+        raise Http404("Заказ не найден")
 
     if request.POST.get("redirect_to_detail"):
         return redirect(reverse("orders:detail", kwargs={"pk": pk}))
