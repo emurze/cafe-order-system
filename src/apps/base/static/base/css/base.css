@@ -1,4 +1,4 @@
-/* --- Глобальные стили и сброс --- */
+/* --- Reset --- */
 *,
 *::before,
 *::after {
@@ -22,10 +22,10 @@ body {
     overflow: auto;
 }
 
-/* Оболочка приложения */
+
 #app_wrapper {
     width: 100%;
-    max-width: 1200px; /* Сделали карточку больше */
+    max-width: 1200px;
     background: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -42,18 +42,15 @@ main {
     overflow-y: auto;
 }
 
-/* Убираем стандартные стили списков */
 ul, ol {
     list-style: none;
 }
 
-/* Убираем стандартные стили ссылок */
 a {
     text-decoration: none;
     color: inherit;
 }
 
-/* Сброс стилей кнопок */
 button {
     cursor: pointer;
     background: none;
@@ -61,7 +58,6 @@ button {
     padding: 0;
 }
 
-/* Стили для сообщений */
 .messages {
     margin-bottom: 20px;
 }
@@ -72,25 +68,24 @@ button {
     border-radius: 8px;
     margin-bottom: 15px;
     font-size: 14px;
-    background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid #e0e0e0;
     color: #333;
+    background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.alert-success {
-    background-color: rgba(212, 237, 218, 0.9);
+.alert-success, .alert-error {
+    background: rgba(212, 237, 218, 0.9);
     border-color: #c3e6cb;
     color: #155724;
 }
 
 .alert-error {
-    background-color: rgba(248, 215, 218, 0.9);
+    background: rgba(248, 215, 218, 0.9);
     border-color: #f5c6cb;
     color: #721c24;
 }
 
-/* Стили для крестика */
 .close-btn {
     position: absolute;
     top: 50%;
@@ -100,7 +95,7 @@ button {
     font-size: 20px;
     font-weight: bold;
     opacity: 0.7;
-    transition: opacity 0.3s ease, background-color 0.3s ease;
+    transition: opacity 0.3s ease, background 0.3s ease;
     width: 24px;
     height: 24px;
     display: flex;
@@ -109,7 +104,7 @@ button {
     border-radius: 50%;
 }
 
-.alert-success .close-btn {
+.alert-success .close-btn, .alert-error .close-btn {
     color: #28a745;
 }
 
@@ -119,15 +114,15 @@ button {
 
 .close-btn:hover {
     opacity: 1;
-    background-color: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.05);
 }
 
 .alert-success .close-btn:hover {
-    background-color: rgba(40, 167, 69, 0.1);
+    background: rgba(40, 167, 69, 0.1);
 }
 
 .alert-error .close-btn:hover {
-    background-color: rgba(220, 53, 69, 0.1);
+    background: rgba(220, 53, 69, 0.1);
 }
 
 @media (max-width: 1070px) {

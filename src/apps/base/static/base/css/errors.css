@@ -10,10 +10,10 @@
 }
 
 .error-content {
-    background-color: #fff; /* Белый фон контента */
+    background-color: #fff;
     padding: 40px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     max-width: 500px;
     width: 100%;
 }
@@ -22,28 +22,28 @@
     font-size: 80px;
     margin: 0;
     font-weight: bold;
-    color: #444; /* Серый цвет заголовка */
+    color: #555;
 }
 
 .error-message {
     font-size: 24px;
     margin: 20px 0;
     font-weight: bold;
-    color: #333; /* Темный текст */
+    color: #333;
 }
 
 .error-description {
     font-size: 16px;
     margin-bottom: 30px;
     line-height: 1.5;
-    color: #666; /* Серый текст */
+    color: #666;
 }
 
 .home-button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff; /* Синий фон кнопки */
-    color: #fff; /* Белый текст */
+    background-color: #007bff;
+    color: #fff;
     text-decoration: none;
     font-size: 16px;
     font-weight: 500;
@@ -52,5 +52,5 @@
 }
 
 .home-button:hover {
-    background-color: #0056b3; /* Темно-синий фон при наведении */
+    background-color: #0056b3;
 }

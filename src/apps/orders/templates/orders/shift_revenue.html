@@ -12,7 +12,7 @@
         <div class="revenue-form">
             <h1>Рассчитать выручку за смену</h1>
             <form method="get" action="">
-                <!-- Поле для начала смены -->
+                <!-- Start time field -->
                 <div class="form-field">
                     <label for="{{ form.start_time.id_for_label }}">{{ form.start_time.label }}</label>
                     {{ form.start_time }}
@@ -25,7 +25,7 @@
                     {% endif %}
                 </div>
 
-                <!-- Поле для конца смены -->
+                <!-- End time field -->
                 <div class="form-field">
                     <label for="{{ form.end_time.id_for_label }}">{{ form.end_time.label }}</label>
                     {{ form.end_time }}
@@ -38,25 +38,28 @@
                     {% endif %}
                 </div>
 
-                <!-- Кнопка отправки формы -->
                 <button type="submit" class="submit-button">Рассчитать</button>
             </form>
 
-            <!-- Блок с результатами -->
+            <!-- Result of the calculation -->
             {% if revenue is not None and total_orders is not None %}
                 <div class="revenue-result">
                     <h2>Результаты расчёта:</h2>
-                    <p><strong>Время начала
-                        смены:</strong> {{ start_time|time:"H:i" }}</p>
-                    <p><strong>Время окончания
-                        смены:</strong> {{ end_time|time:"H:i" }}</p>
+                    <p>
+                        <strong>Время начала смены:</strong>
+                        {{ start_time|time:"H:i" }}
+                    </p>
+                    <p>
+                        <strong>Время окончания смены:</strong>
+                        {{ end_time|time:"H:i" }}
+                    </p>
                     <p><strong>Выручка за смену:</strong> {{ revenue }} BYN</p>
                     <p><strong>Количество заказов:</strong> {{ total_orders }}
                     </p>
                 </div>
             {% endif %}
-
-            <!-- Вывод ошибок формы -->
+            
+            <!-- Form errors -->
             {% if form.errors %}
                 <div class="error-messages">
                     <h2>Ошибки:</h2>

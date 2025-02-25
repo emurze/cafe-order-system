@@ -1,5 +1,5 @@
 <div class="form-row" data-form-id="{{ form_id }}">
-    <!-- Поле "Блюдо" -->
+    <!-- Dish field -->
     <div class="form-group">
         {{ item_form.dish.label_tag }}
         {{ item_form.dish }}
@@ -14,10 +14,11 @@
         {% endif %}
     </div>
 
-    <!-- Поле "Стоймость в BYN:" -->
+    <!-- Price field -->
     <div class="form-group price-group">
-        <label for="{{ item_form.price.id_for_label }}">Стоймость в
-            BYN:</label>
+        <label for="{{ item_form.price.id_for_label }}">
+            Стоймость в BYN:
+        </label>
         <div class="price-field">
             {{ item_form.price }}
         </div>
@@ -32,7 +33,7 @@
         {% endif %}
     </div>
 
-    <!-- Поле "Количество" -->
+    <!-- Quantity field -->
     <div class="form-group quantity-group">
         {{ item_form.quantity.label_tag }}
         {{ item_form.quantity }}
@@ -47,7 +48,7 @@
         {% endif %}
     </div>
 
-    <!-- Кнопка "Удалить" -->
+    <!-- Delete button -->
     <button type="button" class="remove-item" data-form-id="{{ form_id }}"
             aria-label="Удалить элемент">
         Удалить

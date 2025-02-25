@@ -1,0 +1,40 @@
+.status-pending, .status-ready, .status-paid {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    position: relative;
+    right: 3px;
+}
+
+.status-pending::before, .status-ready::before, .status-paid::before {
+    font-family: "Font Awesome 5 Free";
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+.status-pending {
+    color: #b38f00;
+}
+
+.status-pending::before {
+    content: "\f017";
+    color: #b38f00;
+}
+
+.status-ready {
+    color: #009966;
+}
+
+.status-ready::before {
+    content: "\f00c";
+    color: #009966;
+}
+
+.status-paid {
+    color: #0066cc;
+}
+
+.status-paid::before {
+    content: "\f155";
+    color: #0066cc;
+}

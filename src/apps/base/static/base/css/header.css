@@ -25,9 +25,8 @@
     border-radius: 5px;
 }
 
-/* Стиль для выбранного/активного элемента */
 .menu a.selected {
-    background: #444; /* Тёмно-серый цвет */
+    background: #444;
     color: white;
     border-radius: 5px;
 }

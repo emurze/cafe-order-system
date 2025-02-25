@@ -7,16 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let deleteForm = null;
 
     deleteButtons.forEach(button => {
-        button.addEventListener('click', function (e) {
+        button.addEventListener('click', (e) => {
             e.preventDefault();
             deleteForm = button.closest('form');
             modal.classList.add('show');
         });
     });
 
-    confirmDeleteBtn.addEventListener('click', function () {
+    confirmDeleteBtn.addEventListener('click', () => {
         if (deleteForm) {
-            const orderCard = deleteForm.closest('.container');
+            const orderCard = deleteForm.closest('.order-card');
             orderCard.classList.add('removing');
 
             setTimeout(() => {
@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    cancelDeleteBtn.addEventListener('click', function () {
+    cancelDeleteBtn.addEventListener('click', () => {
         modal.classList.remove('show');
     });
 
-    window.addEventListener('click', function (e) {
+    window.addEventListener('click', (e) => {
         if (e.target === modal) {
             modal.classList.remove('show');
         }

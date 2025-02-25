@@ -1,5 +1,5 @@
-@import "_status.css";
-/* Стили для карточки заказа */
+@import "../shared/status.css";
+
 .order-card {
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -10,16 +10,14 @@
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
     display: flex;
     flex-direction: column;
-    height: 100%; /* Занимает всю высоту контейнера */
-    position: relative; /* Для позиционирования кнопок */
+    height: 100%;
+    position: relative;
 }
-
 
 .order-card.removing {
     opacity: 0;
     transform: scale(0.9);
 }
-
 
 .order-card:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -29,7 +27,7 @@
     text-decoration: none;
     color: inherit;
     display: block;
-    flex-grow: 1; /* Занимает все доступное пространство */
+    flex-grow: 1;
 }
 
 .order-title {
@@ -49,7 +47,6 @@
     color: #2c3e50;
 }
 
-/* Стили для блюд */
 .order-items-title {
     font-size: 14px;
     font-weight: bold;
@@ -71,7 +68,6 @@
     border-bottom: 1px solid #eee;
 }
 
-
 .order-items li:last-child {
     border-bottom: none;
     padding-top: 8px;
@@ -92,47 +88,39 @@
     color: #777;
 }
 
-/* Стили для кнопок действий */
 .order-actions {
     display: flex;
-    gap: 8px; /* Уменьшаем отступ между кнопками */
+    gap: 8px;
     align-items: center;
-    justify-content: flex-end; /* Выравниваем кнопки по правому краю */
-    margin-top: 20px; /* Отступ сверху */
+    justify-content: flex-end;
+    margin-top: 20px;
 }
 
-/* Стили для кнопки удаления */
-.delete-order-btn {
-    padding: 6px 12px; /* Уменьшаем размер кнопки */
-    background-color: #dc3545; /* Красный цвет */
+.delete-order-btn, .update-status-btn {
+    padding: 6px 12px;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 12px; /* Уменьшаем размер шрифта */
+    font-size: 12px;
     transition: background-color 0.3s ease;
     text-decoration: none;
+}
+
+.delete-order-btn {
+    background-color: #dc3545;
 }
 
 .delete-order-btn:hover {
-    background-color: #c82333; /* Темнее красный при наведении */
+    background-color: #c82333;
 }
 
-/* Стили для кнопки смены статуса */
 .update-status-btn {
-    padding: 6px 12px; /* Уменьшаем размер кнопки */
-    background-color: #0070FF; /* Насыщенный синий (#0070FF) */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 12px; /* Уменьшаем размер шрифта */
-    transition: background-color 0.3s ease;
-    text-decoration: none;
+    background-color: #0070FF;
 }
 
 .update-status-btn:hover {
-    background-color: #0063d6; /* Менее тёмный синий при наведении */
+    background-color: #0063d6;
 }
 
 .ellipsis {
@@ -143,14 +131,14 @@
 }
 
 .ellipsis a {
-    text-decoration: none; /* Убираем подчеркивание */
+    text-decoration: none;
     color: #007bff;
-    font-size: 14px; /* Размер текста */
-    border-radius: 5px; /* Скругление углов */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Плавные переходы */
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
     display: flex;
-    align-items: center; /* Выравниваем текст и иконку по центру */
-    gap: 5px; /* Расстояние между текстом и иконкой */
+    align-items: center;
+    gap: 5px;
 }
 
 .ellipsis a:hover {

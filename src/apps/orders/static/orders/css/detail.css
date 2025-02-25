@@ -1,4 +1,4 @@
-@import "include/_status.css";
+@import "shared/status.css";
 
 /* Стили для блока с кнопкой "Назад" */
 .back-to-order-wrapper {

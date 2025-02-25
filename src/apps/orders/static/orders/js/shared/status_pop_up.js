@@ -5,7 +5,6 @@ function toggleStatusPopup(orderId) {
     }
 }
 
-
 document.querySelectorAll('.update-status-btn').forEach(button => {
     button.addEventListener('click', (event) => {
         event.stopPropagation();

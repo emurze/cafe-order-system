@@ -1,14 +1,16 @@
 <div class="order-card">
-    <!-- Обертка для содержимого карточки -->
     <a href="{{ order.get_absolute_url }}" class="order-card-link">
-        <!-- Order Title -->
         <h2 class="order-title">Заказ #{{ order.id }}</h2>
 
         <!-- Order Details -->
-        <p class="order-details"><strong>Номер
-            стола:</strong> {{ order.table_number }}</p>
-        <p class="order-details"><strong>Общая
-            стоимость:</strong> {{ order.total_price }} BYN</p>
+        <p class="order-details">
+            <strong>Номер стола:</strong> 
+            {{ order.table_number }}
+        </p>
+        <p class="order-details">
+            <strong>Общая стоимость:</strong> 
+            {{ order.total_price }} BYN
+        </p>
         <p class="order-details">
             <strong>Статус:</strong>
             <span id="status-{{ order.id }}"
@@ -41,13 +43,14 @@
         {% endif %}
     </a>
 
-    <!-- Кнопки действий -->
+    <!-- Order buttons -->
     <div class="order-actions">
         <button class="update-status-btn"
                 onclick="toggleStatusPopup({{ order.id }})">
             Сменить статус
         </button>
-
+        
+        <!-- Change status button -->
         <div class="status-popup-wrapper">
             <div class="status-popup hidden"
                  id="statusPopup-{{ order.id }}">
@@ -58,20 +61,21 @@
                     <select name="status" id="id_status">
                         {% for value, display in update_status_form.fields.status.choices %}
                             <option value="{{ value }}"
-                                {% if order.status == value %}
+                                    {% if order.status == value %}
                                     selected{% endif %}>
                                 {{ display }}
                             </option>
                         {% endfor %}
                     </select>
 
-                    <button type="submit" class="confirm-btn">Сохранить
+                    <button type="submit" class="confirm-btn">
+                        Сохранить
                     </button>
                 </form>
             </div>
         </div>
 
-        <!-- Форма для удаления -->
+        <!-- Delete button -->
         <form action="{% url 'orders:delete' order.id %}" method="post"
               class="delete-form">
             {% csrf_token %}
@@ -80,4 +84,4 @@
     </div>
 </div>
 
-{% include "orders/include/_delete_confirmation_model.html" %}
+{% include "orders/shared/delete_confirmation_model.html" %}
