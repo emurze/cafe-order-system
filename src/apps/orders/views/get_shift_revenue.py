@@ -9,6 +9,10 @@ from apps.orders.forms import OrderShiftRevenueForm
 
 @require_GET
 def get_shift_revenue(request: WSGIRequest) -> HttpResponse:
+    """
+    View to display shift revenue details based on
+    the provided start and end times.
+    """
     extra_context = {"selected": "shift_revenue"}
 
     if request.GET:

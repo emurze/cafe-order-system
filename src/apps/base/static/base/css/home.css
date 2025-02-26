@@ -1,53 +1,97 @@
-.coffee-description {
+.platform-description {
     padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
+.system-intro {
+    text-align: center;
+    margin-bottom: 40px;
 }
 
-h2 {
-    font-size: 1.5em;
-    margin-top: 30px;
-    margin-bottom: 15px;
-}
-
-h3 {
-    font-size: 1.3em;
-    margin-top: 25px;
+.system-intro h1 {
+    color: #222; /* Почти черный */
+    font-size: 2.5em;
     margin-bottom: 10px;
 }
 
-p.intro {
-    font-size: 1.1em;
-    margin-bottom: 30px;
-}
-
-ol.steps {
-    list-style-type: decimal;
-    padding-left: 20px;
-}
-
-ol.steps li {
-    margin: 10px 0;
-    font-size: 1em;
-    color: #444;
-}
-
-ul.benefits {
-    list-style-type: disc;
-    padding-left: 20px;
-}
-
-ul.benefits li {
-    margin: 10px 0;
-    font-size: 1em;
-    color: #444;
-}
-
-p.call-to-action {
+.system-description {
     font-size: 1.2em;
-    color: #4a2c2a;
+    color: #444; /* Темно-серый */
+    line-height: 1.6;
+}
+
+h2 {
+    color: #222; /* Почти черный */
     margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+h3 {
+    color: #111; /* Почти черный */
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.features {
+    list-style-type: none;
+    padding: 0;
+}
+
+.features li {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9; /* Светло-серый фон */
+    border-left: 4px solid #007bff; /* Синий цвет для границы */
+    border-radius: 4px;
+}
+
+.features li strong {
+    color: #111; /* Почти черный */
+    font-size: 1.1em;
+}
+
+.features li p {
+    margin: 10px 0 0;
+    color: #333; /* Темно-серый */
+    line-height: 1.5;
+}
+
+.api-info {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f9f9f9; /* Светло-серый фон */
+    border-left: 4px solid #007bff; /* Синий цвет для границы */
+    border-radius: 4px;
+}
+
+.api-info h2 {
+    color: #222; /* Почти черный */
+    margin-bottom: 10px;
+}
+
+.api-info p {
+    color: #444; /* Темно-серый */
+    line-height: 1.6;
+}
+
+.api-info code {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #e9f5ff; /* Светло-синий фон для кода */
+    border-radius: 4px;
+    font-family: monospace;
+    color: #007bff; /* Синий цвет для текста кода */
+}
+
+.call-to-action {
+    text-align: center;
+    font-size: 1.2em;
+    color: #007bff; /* Синий цвет для призыва к действию */
+    margin-top: 30px;
+    font-weight: bold;
 }

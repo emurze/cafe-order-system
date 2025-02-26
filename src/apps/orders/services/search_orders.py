@@ -1,32 +1,19 @@
-from django.contrib.postgres.search import (
-    SearchQuery,
-    SearchRank,
-    SearchVector,
-)
-from django.db.models import Case, When, Value, QuerySet
+from django.contrib.postgres.search import SearchQuery, SearchRank
+from django.db.models import QuerySet, F
 
-from apps.orders.models import Order
+from config.settings import SEARCH_QUERY_CONFIG
 
 
 def search_orders(queryset: QuerySet, query: str) -> QuerySet:
+    """Searches and ranks orders by relevance based on a query string."""
+
     if not query:
         return queryset
 
-    search_query = SearchQuery(query)
-    return (
-        queryset.annotate(
-            status_text=Case(
-                *[
-                    When(status=db_value, then=Value(label))
-                    for db_value, label in Order.Status.choices
-                ],
-                default=Value(""),
-            ),
-            rank=SearchRank(
-                SearchVector("id", "status_text"),
-                search_query,
-            ),
-        )
-        .filter(rank__gt=0.001)
+    search_query = SearchQuery(query, config=SEARCH_QUERY_CONFIG)
+    q = (
+        queryset.filter(search_vector=search_query)  # ✅ Uses GIN index
+        .annotate(rank=SearchRank(F("search_vector"), search_query))
         .order_by("-rank")
     )
+    return q

@@ -11,6 +11,11 @@ from apps.orders.models import OrderItem
 
 @require_http_methods(["GET", "POST"])
 def create_order(request: WSGIRequest) -> HttpResponse:
+    """
+    View for creating a new order. Handles both displaying the order form
+    (GET) and processing the form data (POST). On successful order creation,
+    redirects to the orders list page and shows a success message.
+    """
     extra_context = {"selected": "orders"}
 
     if request.method == "POST":

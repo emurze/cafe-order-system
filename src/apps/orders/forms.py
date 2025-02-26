@@ -8,12 +8,18 @@ ORDER_CANNOT_BE_EMPTY_ERROR = "Заказ не должен быть пусты�
 
 
 class OrderForm(forms.ModelForm):
+    """Form for validating the data for creation of an order."""
+
     class Meta:
         model = Order
         fields = ("table_number",)
 
 
 class BaseOrderItemFormSet(forms.BaseModelFormSet):
+    """
+    Formset for validating that an order contains at least one order item.
+    """
+
     def clean(self):
         super().clean()
 
@@ -22,6 +28,8 @@ class BaseOrderItemFormSet(forms.BaseModelFormSet):
 
 
 class OrderItemForm(forms.ModelForm):
+    """Form for validating the data for creation of an order item."""
+
     class Meta:
         model = OrderItem
         fields = (
@@ -31,6 +39,7 @@ class OrderItemForm(forms.ModelForm):
         )
 
 
+# Formset for managing multiple order items.
 OrderItemFormSet = modelformset_factory(
     OrderItem,
     form=OrderItemForm,
@@ -40,12 +49,19 @@ OrderItemFormSet = modelformset_factory(
 
 
 class OrderUpdateForm(forms.ModelForm):
+    """Form for validating the status to update an order."""
+
     class Meta:
         model = Order
         fields = ("status",)
 
 
 class OrderShiftRevenueForm(forms.Form):
+    """
+    Form for validating the start and end times
+    for calculating shift revenue.
+    """
+
     start_time = forms.TimeField(
         label="Начало смены (HH:MM)",
         widget=forms.TimeInput(attrs={"type": "time"}),

@@ -8,6 +8,8 @@ from config.settings import ORDER_PAGINATE_BY
 
 
 class OrderSearchView(OrderLongQueryMixin, ListView):
+    """View for searching orders based on a query parameter."""
+
     template_name = "orders/list.html"
     extra_context = {
         "selected": "orders",

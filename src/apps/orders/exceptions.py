@@ -1,2 +1,2 @@
 class OrderNotFoundException(Exception):
-    pass
+    """Service exception raised when an order is not found."""

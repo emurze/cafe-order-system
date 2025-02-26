@@ -4,6 +4,8 @@ from apps.orders.models import Order, OrderItem
 
 
 class OrderLongQueryMixin:
+    """Mixin for handling long queries related to order data."""
+
     def get_queryset(self):
         return Order.objects.only(
             "id",
@@ -25,4 +27,7 @@ class OrderLongQueryMixin:
 
 
 class OrderShortQueryMixin(OrderLongQueryMixin):
-    """OrderShortQueryMixin uses The same fields"""  # TODO
+    """
+    Mixin for handling short queries related to order data.
+    For now, it functions identically to the long query mixin.
+    """

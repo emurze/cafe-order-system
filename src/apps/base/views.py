@@ -6,11 +6,14 @@ from rest_framework import status
 
 
 class HomeView(TemplateView):
+    """View for rendering the home page."""
+
     template_name = "base/home.html"
     extra_context = {"selected": "home"}
 
 
 def error_handler_404(request: WSGIRequest, exception) -> HttpResponse:
+    """Handles 404 Not Found errors."""
     return render(
         request,
         "base/errors/404.html",
@@ -19,6 +22,7 @@ def error_handler_404(request: WSGIRequest, exception) -> HttpResponse:
 
 
 def error_handler_500(request: WSGIRequest) -> HttpResponse:
+    """Handles 500 Internal Server Errors."""
     return render(
         request,
         "base/errors/500.html",
@@ -27,6 +31,7 @@ def error_handler_500(request: WSGIRequest) -> HttpResponse:
 
 
 def error_handler_403(request: WSGIRequest, exception) -> HttpResponse:
+    """Handles 403 Forbidden errors."""
     return render(
         request,
         "base/errors/403.html",
@@ -35,6 +40,7 @@ def error_handler_403(request: WSGIRequest, exception) -> HttpResponse:
 
 
 def error_handler_400(request: WSGIRequest, exception) -> HttpResponse:
+    """Handles 400 Bad Request errors."""
     return render(
         request,
         "base/errors/400.html",

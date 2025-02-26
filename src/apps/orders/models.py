@@ -1,5 +1,7 @@
 from decimal import Decimal
 
+from django.contrib.postgres.indexes import GinIndex
+from django.contrib.postgres.search import SearchVectorField
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models import DecimalField
@@ -7,6 +9,11 @@ from django.urls import reverse
 
 
 class Order(models.Model):
+    """
+    Model representing a customer's order, including details like
+    the table number, total price, status, and associated items.
+    """
+
     class Status(models.TextChoices):
         PENDING = "1", "в ожидании"
         READY = "2", "готово"
@@ -31,6 +38,10 @@ class Order(models.Model):
     created_at = models.DateTimeField("Дата создания", auto_now_add=True)
     paid_at = models.DateTimeField("Дата оплаты", null=True, blank=True)
 
+    # Search
+    search_vector = SearchVectorField(null=True, blank=True)
+    status_text = models.TextField(null=True, blank=True)
+
     class Meta:
         ordering = (
             "status",
@@ -41,7 +52,7 @@ class Order(models.Model):
         indexes = [
             models.Index(fields=("status", "-created_at")),
             models.Index(fields=["status", "paid_at"]),
-            # GinIndex(fields=["id", "status"]),
+            GinIndex(fields=["search_vector"]),
         ]
 
     def get_total_price(self) -> Decimal:
@@ -55,7 +66,10 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    """Заказанное блюдо с ценой"""
+    """
+    Model representing an item in an order, including the dish name, price,
+    quantity, and a reference to the parent Order.
+    """
 
     id = models.BigAutoField(primary_key=True)
     dish = models.CharField("Название блюда", max_length=256)
@@ -86,6 +100,10 @@ class OrderItem(models.Model):
             ),
         ],
     )
+
+    class Meta:
+        verbose_name = "Элемент заказа"
+        verbose_name_plural = "Элемент заказа"
 
     def get_price(self) -> Decimal:
         return self.price * self.quantity

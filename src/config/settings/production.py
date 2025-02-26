@@ -13,7 +13,7 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = [  # TODO
+ALLOWED_HOSTS = [
     "192.168.0.104",
     "127.0.0.1",
     "localhost",

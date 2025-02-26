@@ -11,6 +11,11 @@ from apps.orders.forms import OrderUpdateForm
 
 @require_POST
 def update_order_status(request: WSGIRequest, pk: int) -> HttpResponse:
+    """
+    View to update the status of an order.
+    If the update is successful, redirects to the order detail or list view.
+    If the order is not found, raises a 404 error.
+    """
     form = OrderUpdateForm(request.POST)
     if not form.is_valid():
         return redirect(reverse("orders:list"))

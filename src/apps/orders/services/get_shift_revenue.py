@@ -5,6 +5,10 @@ from apps.orders.models import Order
 
 
 def get_shift_revenue(start_time, end_time) -> dict:
+    """
+    Calculates the total revenue and total number of orders
+    within a specified time range.
+    """
     today = timezone.now().date()
 
     start_datetime = timezone.make_aware(

@@ -5,6 +5,8 @@ from apps.orders.mixins import OrderShortQueryMixin
 
 
 class OrderDetailView(OrderShortQueryMixin, DetailView):
+    """View to display detailed information about an order."""
+
     context_object_name = "order"
     template_name = "orders/detail.html"
     extra_context = {"selected": "orders"}

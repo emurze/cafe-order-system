@@ -10,10 +10,11 @@ from apps.orders.exceptions import OrderNotFoundException
 
 @require_http_methods(["POST", "DELETE"])
 def delete_order(request: WSGIRequest, pk: int) -> HttpResponse:
+    """Deletes an order by its primary key, handling transaction and error."""
     try:
         with transaction.atomic():
             services.delete_order(pk)
     except OrderNotFoundException:
         raise Http404("Заказ не найден")
-
-    return HttpResponseRedirect(reverse("orders:list"))
+    else:
+        return HttpResponseRedirect(reverse("orders:list"))

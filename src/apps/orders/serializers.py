@@ -3,10 +3,9 @@ from rest_framework import serializers
 from apps.orders.models import Order, OrderItem
 
 
-# GET
-
-
 class OrderItemSerializer(serializers.ModelSerializer):
+    """Serializer for displaying details of an OrderItem."""
+
     class Meta:
         model = OrderItem
         fields = (
@@ -17,6 +16,8 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    """Serializer for displaying details of an Order, including order items."""
+
     items = OrderItemSerializer(many=True)
 
     class Meta:
@@ -32,16 +33,17 @@ class OrderSerializer(serializers.ModelSerializer):
         )
 
 
-# CREATE
-
-
 class OrderItemCreateSerializer(serializers.ModelSerializer):
+    """Serializer for validating data for an OrderItem."""
+
     class Meta:
         model = OrderItem
         fields = ("dish", "price", "quantity")
 
 
 class OrderCreateSerializer(serializers.ModelSerializer):
+    """Serializer for validating data for creating an Order."""
+
     items = OrderItemCreateSerializer(many=True)
 
     class Meta:
@@ -52,19 +54,20 @@ class OrderCreateSerializer(serializers.ModelSerializer):
         )
 
 
-# UPDATE
-
-
 class OrderUpdateSerializer(serializers.ModelSerializer):
+    """Serializer for validating data for updating the status of an Order"""
+
     class Meta:
         model = Order
         fields = ("status",)
 
 
-# SHIFT REVENUE
-
-
 class OrderShiftRevenueSerializer(serializers.Serializer):
+    """
+    Serializer for validating the start and end times
+    for calculating shift revenue.
+    """
+
     start_time = serializers.TimeField(
         label="Начало смены (HH:MM)",
         input_formats=["%H:%M"],
