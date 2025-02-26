@@ -28,10 +28,7 @@
             </p>
             <p class="order-details">
                 <strong>Статус:</strong>
-                <span class="status-badge {% if order.status == order.Status.PENDING %}status-pending
-        {% elif order.status == order.Status.READY %}status-ready
-        {% elif order.status == order.Status.PAID %}status-paid
-        {% endif %}">{{ order.get_status_display }}</span>
+                {% include "orders/shared/status.html" with order=order %}
             </p>
         </div>
 
@@ -53,8 +50,7 @@
 
         <!-- Order buttons -->
         <div class="actions">
-            <button class="update-status-btn"
-                    onclick="toggleStatusPopup({{ order.id }})">
+            <button class="update-status-btn" data-order-id="{{ order.id }}">
                 Сменить статус
             </button>
 

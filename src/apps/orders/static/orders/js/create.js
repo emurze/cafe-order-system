@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const emptyForm = document.getElementById("empty-form")
+    emptyForm.style.display = "none";
+
     const formsetContainer = document.getElementById("order-items");
     const addButton = document.getElementById("add-item");
     const totalForms = document.querySelector("[name='form-TOTAL_FORMS']");

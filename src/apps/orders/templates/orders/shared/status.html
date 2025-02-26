@@ -1,0 +1,15 @@
+{% load static %}
+<span id="status-{{ order.id }}"
+      class="status-badge {% if order.status == order.Status.PENDING %}status-pending
+{% elif order.status == order.Status.READY %}status-ready
+{% elif order.status == order.Status.PAID %}status-paid
+{% endif %}">
+    {% if order.status == order.Status.PAID %}
+        <img src="{% static "base/images/dollar.svg" %}" alt="">
+    {% elif order.status == order.Status.PENDING %}
+        <img src="{% static "base/images/clock.svg" %}" alt="">
+    {% elif order.status == order.Status.READY %}
+        <img src="{% static "base/images/ready.svg" %}" alt="">
+    {% endif %}
+    {{ order.get_status_display }}
+</span>

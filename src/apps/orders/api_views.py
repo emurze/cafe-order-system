@@ -7,7 +7,6 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from apps.orders import services
-from apps.orders.exceptions import OrderNotFoundException
 from apps.orders.models import Order, OrderItem
 from apps.orders.serializers import (
     OrderSerializer,

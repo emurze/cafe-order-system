@@ -16,17 +16,7 @@
     color: #b38f00;
 }
 
-.status-pending::before {
-    content: "\f017";
-    color: #b38f00;
-}
-
 .status-ready {
-    color: #009966;
-}
-
-.status-ready::before {
-    content: "\f00c";
     color: #009966;
 }
 
@@ -34,7 +24,22 @@
     color: #0066cc;
 }
 
-.status-paid::before {
-    content: "\f155";
-    color: #0066cc;
+.status-pending, .status-ready, .status-paid {
+    position: relative;
+    height: 28px;
+    left: 5px;
+    bottom: 1px
+}
+
+.status-paid img, .status-pending img, .status-ready img {
+    position: relative;
+    width: 16px;
+    right: 6px;
+}
+
+
+.status-badge {
+    display: inline-flex;
+    justify-content: center;
+    vertical-align: middle;
 }

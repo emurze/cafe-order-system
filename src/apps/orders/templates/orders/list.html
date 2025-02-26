@@ -13,85 +13,111 @@
 
 {% block main %}
     <div class="container">
-        <!-- Page header -->
-        <div class="page-header">
-            <h1 class="page-title">Таблица заказов</h1>
-            <div class="header-actions">
-                <form class="search-form" method="GET"
-                      action="{% url 'orders:search' %}">
-                    <div class="search-input-wrapper">
-                        <input type="text" name="query"
-                               placeholder="Поиск заказов..."/>
-                        <button type="submit" class="search-btn">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
+    <!-- Page header -->
+    <div class="page-header">
+        <h1 class="page-title">Таблица заказов</h1>
+        <div class="header-actions">
+            <form class="search-form" method="GET"
+                  action="{% url 'orders:search' %}">
+                <div class="search-input-wrapper">
+                    <input type="text" name="query"
+                           placeholder="Поиск заказов..."/>
+                    <button type="submit" class="search-btn">
+                        <img src="{% static "base/images/search.svg" %}"
+                             alt="">
+                    </button>
+                </div>
+            </form>
 
-                <a href="{% url 'orders:create' %}"
-                   class="btn create-order-btn">Создать заказ</a>
-            </div>
+            <a href="{% url 'orders:create' %}"
+               class="btn create-order-btn">Создать заказ</a>
+        </div>
+    </div>
+
+    <!-- Messages -->
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                    <span class="close-btn"
+                          onclick="this.parentElement.remove()">&times;</span>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Orders grid -->
+    {% if orders %}
+        <div class="grid">
+            {% for order in orders %}
+                {% include 'orders/list/order_card.html' with order=order %}
+            {% endfor %}
         </div>
 
-        <!-- Messages -->
-        {% if messages %}
-            <div class="messages">
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">
-                        {{ message }}
-                        <span class="close-btn"
-                              onclick="this.parentElement.remove()">&times;</span>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-
-        <!-- Orders grid -->
-        {% if orders %}
-            <div class="grid">
-                {% for order in orders %}
-                    {% include 'orders/list/order_card.html' with order=order %}
-                {% endfor %}
-            </div>
-
-            <!-- Pagination -->
-            <div class="pagination">
-                <span class="step-links">
+        <!-- Pagination -->
+        <div class="pagination">
+        <span class="step-links">
                     {% if page_obj.has_previous %}
                         <a href="?page=1" class="pagination-link first-page">
-                            <i class="fas fa-angle-double-left"></i>
+                            <!-- Double Left Arrow SVG -->
+                            <svg width="16" height="16" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round">
+                              <path d="M11 17L6 12L11 7"/>
+                              <path d="M18 17L13 12L18 7"/>
+                            </svg>
+
                         </a>
                         <a href="?page={{ page_obj.previous_page_number }}"
                            class="pagination-link prev-page">
-                            <i class="fas fa-angle-left"></i>
+                            <!-- Single Left Arrow SVG -->
+                            <svg width="16" height="16" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round">
+  <path d="M15 18L9 12L15 6"/>
+</svg>
                         </a>
                     {% endif %}
 
-                    <span class="current-page">
-                        Страница 
-                        <span class="page-number">{{ page_obj.number }}</span> 
-                        из 
-                        <span class="total-pages">
-                            {{ page_obj.paginator.num_pages }}
-                        </span>
+            <span class="current-page">
+                        Страница
+                        <span class="page-number">{{ page_obj.number }}</span>
+                        из
+                        <span class="total-pages">{{ page_obj.paginator.num_pages }}</span>
                     </span>
 
-                    {% if page_obj.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}"
-                           class="pagination-link next-page">
-                            <i class="fas fa-angle-right"></i>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}"
+                   class="pagination-link next-page">
+                            <!-- Single Right Arrow SVG -->
+                            <svg width="16" height="16" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round">
+  <path d="M9 18L15 12L9 6"/>
+</svg>
                         </a>
-                        <a href="?page={{ page_obj.paginator.num_pages }}"
-                           class="pagination-link last-page">
-                            <i class="fas fa-angle-double-right"></i>
+                <a href="?page={{ page_obj.paginator.num_pages }}"
+                   class="pagination-link last-page">
+                            <!-- Double Right Arrow SVG -->
+                            <svg width="16" height="16" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round">
+  <path d="M13 17L18 12L13 7"/>
+  <path d="M6 17L11 12L6 7"/>
+</svg>
+
                         </a>
-                    {% endif %}
+            {% endif %}
                 </span>
-            </div>
-        {% else %}
-            <p class="empty-message">Заказов пока нет.</p>
-        {% endif %}
-    </div>
+    {% else %}
+        <p class="empty-message">Заказов пока нет.</p>
+    {% endif %}
+</div>
 {% endblock %}
 
 {% block scripts %}

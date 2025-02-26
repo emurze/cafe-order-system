@@ -188,3 +188,15 @@
         left: -73px !important;
     }
 }
+
+.status-pending, .status-ready, .status-paid {
+    bottom: 3px;
+}
+
+.status-pending img {
+    top: 3px;
+}
+
+.status-pending img, .status-ready img, .status-paid img {
+    top: 1px;
+}

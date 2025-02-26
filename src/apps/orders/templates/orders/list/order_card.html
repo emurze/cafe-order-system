@@ -4,22 +4,16 @@
 
         <!-- Order Details -->
         <p class="order-details">
-            <strong>Номер стола:</strong> 
+            <strong>Номер стола:</strong>
             {{ order.table_number }}
         </p>
         <p class="order-details">
-            <strong>Общая стоимость:</strong> 
+            <strong>Общая стоимость:</strong>
             {{ order.total_price }} BYN
         </p>
         <p class="order-details">
             <strong>Статус:</strong>
-            <span id="status-{{ order.id }}"
-                  class="status-badge {% if order.status == order.Status.PENDING %}status-pending
-            {% elif order.status == order.Status.READY %}status-ready
-            {% elif order.status == order.Status.PAID %}status-paid
-            {% endif %}">
-                {{ order.get_status_display }}
-            </span>
+            {% include "orders/shared/status.html" with order=order %}
         </p>
 
         <!-- Order Items -->
@@ -45,11 +39,10 @@
 
     <!-- Order buttons -->
     <div class="order-actions">
-        <button class="update-status-btn"
-                onclick="toggleStatusPopup({{ order.id }})">
+        <button class="update-status-btn" data-order-id="{{ order.id }}">
             Сменить статус
         </button>
-        
+
         <!-- Change status button -->
         <div class="status-popup-wrapper">
             <div class="status-popup hidden"
