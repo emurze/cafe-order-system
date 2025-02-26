@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".close-btn").forEach(button => {
-        button.addEventListener("click", () => {
-            this.parentElement.remove();
+        button.addEventListener("click", (event) => {
+            event.target.closest(".alert").remove();
         });
     });
 });
