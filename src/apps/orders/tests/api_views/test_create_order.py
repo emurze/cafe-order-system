@@ -23,8 +23,8 @@ def test_can_create_order(api_client: APIClient) -> None:
 
 @pytest.mark.django_db
 def test_cannot_create_order_when_order_is_empty(
-        api_client: APIClient,
-        faker: Faker,
+    api_client: APIClient,
+    faker: Faker,
 ) -> None:
     # act
     url = reverse("order-list")

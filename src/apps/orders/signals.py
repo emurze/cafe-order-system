@@ -10,9 +10,9 @@ from .models import Order
 
 @receiver(pre_save, sender=Order)
 def update_order_total_price(
-        sender: type[Order],
-        instance: Order,
-        **__,
+    sender: type[Order],
+    instance: Order,
+    **__,
 ) -> None:
     """Ensures the total price is consistent with the order's items."""
     if instance.pk:

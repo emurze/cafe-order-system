@@ -27,8 +27,8 @@ def test_can_delete_order(api_client: APIClient) -> None:
 
 @pytest.mark.django_db
 def test_cannot_delete_order_error_404(
-        api_client: APIClient,
-        faker: Faker,
+    api_client: APIClient,
+    faker: Faker,
 ) -> None:
     # act
     url = reverse("order-detail", args=(faker.random_int(1, 5),))

@@ -46,7 +46,7 @@ def test_can_get_shift_revenue(api_client: APIClient, faker: Faker) -> None:
 
 @pytest.mark.django_db
 def test_cannot_get_shift_revenue_when_query_is_invalid(
-        api_client: APIClient,
+    api_client: APIClient,
 ) -> None:
     # act
     url = reverse("order-shift-revenue")
